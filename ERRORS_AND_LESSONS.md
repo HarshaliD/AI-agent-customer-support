@@ -10,5 +10,7 @@
 - **Issue**: Simply sending raw strings or single messages to the LLM prevents multi-turn memory.
 - **Fix**: Convert stored database records into explicit LangChain message classes (`HumanMessage` and `AIMessage`) before passing the history array to `ChatGoogleGenerativeAI`.
 
-### 3. Model Compatibility & Automatic Function Calling Warnings
-- **Lesson**: When utilizing modern Gemini models with `langchain-google-genai`, ensure API keys and model parameters align with supported endpoints (`gemini-3.6-flash`).
+### 3. Model Latency & Quota Optimization
+- **Issue**: Standard preview/reasoning models (e.g. `gemini-3.6-flash`) can exhibit higher latency (~17-30s per request) and strict free-tier rate limits (20 requests/day).
+- **Fix**: Switched model default in `chat_service.py` to `gemini-3.5-flash-lite` (configurable via `GEMINI_MODEL`), reducing response times down to ~2s. Additionally, added context window slicing (`messages[-10:]`) in `chat.py` to keep prompt payload small and fast.
+

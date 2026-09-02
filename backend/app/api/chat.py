@@ -47,10 +47,11 @@ def chat(request: ChatRequest):
             .order_by(Message.created_at)
         ).scalars().all()
 
-        # 4. Convert database messages into LangChain messages
+        # 4. Convert database messages into LangChain messages (limiting context window for performance)
         chat_history = []
+        recent_messages = messages[-10:] if len(messages) > 10 else messages
 
-        for message in messages:
+        for message in recent_messages:
             if message.role == "user":
                 chat_history.append(
                     HumanMessage(content=message.content)
