@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from sqlalchemy import select
 from langchain_core.messages import HumanMessage, AIMessage
 
@@ -8,11 +8,15 @@ from backend.app.models.conversation import Conversation
 from backend.app.models.message import Message
 from backend.app.services.chat_service import get_ai_response
 
+from backend.app.rag.retrieval import retrieve_documents, build_context
+from backend.app.rag.prompt import rag_prompt
+
+
 router = APIRouter()
 
 
 @router.post("/chat")
-def chat(request: ChatRequest):
+def chat(request: ChatRequest, http_request: Request):
     db = SessionLocal()
 
     try:
@@ -40,14 +44,14 @@ def chat(request: ChatRequest):
         db.add(user_message)
         db.commit()
 
-        # 3. Retrieve all messages from this conversation
+        # 3. Retrieve conversation history
         messages = db.execute(
             select(Message)
             .where(Message.conversation_id == conversation_id)
             .order_by(Message.created_at)
         ).scalars().all()
 
-        # 4. Convert database messages into LangChain messages (limiting context window for performance)
+        # 4. Convert database messages into LangChain messages
         chat_history = []
         recent_messages = messages[-10:] if len(messages) > 10 else messages
 
@@ -62,10 +66,30 @@ def chat(request: ChatRequest):
                     AIMessage(content=message.content)
                 )
 
-        # 5. Send conversation history to Gemini
-        response = get_ai_response(chat_history)
+        # 5. Get the shared Chroma vector store
+        vector_store = http_request.app.state.vector_store
 
-        # 6. Save Gemini's response
+        # 6. Retrieve relevant knowledge
+        results = retrieve_documents(
+            vector_store,
+            request.message,
+            k=2,
+        )
+
+        # 7. Build context from retrieved chunks
+        context = build_context(results)
+
+        # 8. Create the RAG prompt
+        prompt = rag_prompt.invoke({
+            "chat_history": chat_history,
+            "context": context,
+            "question": request.message,
+        })
+
+        # 9. Send prompt to Gemini
+        response = get_ai_response([message for message in prompt.messages])
+
+        # 10. Save Gemini's response
         assistant_message = Message(
             conversation_id=conversation_id,
             role="assistant",
@@ -75,7 +99,7 @@ def chat(request: ChatRequest):
         db.add(assistant_message)
         db.commit()
 
-        # 7. Return response
+        # 11. Return response
         return {
             "conversation_id": conversation_id,
             "response": response
