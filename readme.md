@@ -6,7 +6,7 @@ An AI-powered customer support agent built with **FastAPI, LangChain, Google Gem
 
 ## 🚀 Overview
 
-This repository is built incrementally following an 8-phase project guide. Currently, **Phase 1 (Basic LLM Chat)** and **Phase 2 (RAG Integration)** are fully implemented.
+This repository is built incrementally following an 8-phase project guide. Currently, **Phase 1 (Basic LLM Chat)**, **Phase 2 (RAG Integration)**, and **Phase 3 (Tool Calling)** are fully implemented.
 
 ---
 
@@ -27,6 +27,19 @@ This repository is built incrementally following an 8-phase project guide. Curre
 - **Contextual Prompting**: Grounding LLM responses strictly in retrieved knowledge base context to prevent hallucinations.
 - **Auto-Initialization**: Automatic knowledge base loading and vector store setup on application startup.
 
+### Phase 3 — Tool Calling & Function Execution
+- **LangChain Tool Integration**: `@tool` decorated functions exposing name, description, and parameter schemas to Gemini via `bind_tools()`.
+- **Centralized Tool Registry**: Controlled list (`AVAILABLE_TOOLS`) in `backend/app/tools/available_tools.py`.
+- **Tool Dispatcher & Security Boundary**: Execution dispatcher in `tool_executer.py` validating requests against an allowlist before executing Python code.
+- **Customer & Order Capabilities**:
+  - `get_order`: Retrieves live order status from MySQL.
+  - `get_customer`: Retrieves customer profile details.
+  - `cancel_order`: Enforces business rules (cancels only `processing` orders).
+  - `create_ticket`: Logs support tickets into MySQL.
+  - `request_refund`: Submits pending refund requests.
+  - `search_knowledge_base`: Wraps RAG retrieval system as a tool so Gemini dynamically queries company knowledge.
+- **Multi-Turn Tool Execution Loop**: Autonomous processing loop handling multi-step tool calls, converting outputs to `ToolMessage` instances, and multi-turn context support.
+
 ---
 
 ## 🏗️ System Architecture
@@ -35,28 +48,34 @@ This repository is built incrementally following an 8-phase project guide. Curre
 Client
   │
   ▼
-FastAPI (POST /api/chat)
+FastAPI (POST /chat)
   │
-  ├─► Conversation Memory (MySQL: conversations & messages)
+  ├─► Save & Retrieve Conversation Memory (MySQL)
   │
-  └─► RAG Pipeline
+  └─► Gemini LLM (with bind_tools)
         │
-        ├─► Similarity Search (Chroma Vector DB)
-        │     ▲
-        │     └── Knowledge Base Docs (knowledge_base/*.txt)
+        ├── LLM requests tool call ──┐
+        │                            │
+        │                            ▼
+        │                  Tool Dispatcher (tool_executer.py)
+        │                            │
+        │      ┌─────────────────────┴─────────────────────┐
+        │      ▼                                           ▼
+        │  MySQL Tools                              RAG Tool
+        │  (get_order, cancel_order,                (search_knowledge_base)
+        │   create_ticket, etc.)                           │
+        │      │                                           ▼
+        │      │                                  Chroma Similarity Search
+        │      │                                           │
+        │      └─────────────────────┬─────────────────────┘
+        │                            │
+        │                            ▼
+        │                     ToolMessage Result
+        │                            │
+        └◄─── Return Tool Result ────┘
         │
-        ├─► Relevant Context + Chat History
-        │
-        └─► LangChain Prompt Template
-              │
-              ▼
-        Google Gemini LLM
-              │
-              ▼
-        Generated Answer (Grounded in context)
-              │
-              ▼
-        Saved to MySQL & Returned to Client
+        ▼
+  Final Response Saved to MySQL & Sent to Client
 ```
 
 ---
@@ -68,19 +87,23 @@ AI-Agent-Customer-Support/
 ├── backend/
 │   └── app/
 │       ├── api/
-│       │   └── chat.py          # FastAPI Chat Endpoints
+│       │   └── chat.py          # FastAPI Chat Endpoint & Tool Loop
 │       ├── db/                  # MySQL Database & SQLAlchemy Models
-│       ├── rag/                 # RAG Module
-│       │   ├── document_loader.py # Loads knowledge base documents
-│       │   ├── chunker.py         # Document text splitter
-│       │   ├── embeddings.py      # Gemini text embeddings setup
-│       │   ├── vector_store.py    # ChromaDB initialization & operations
-│       │   ├── retrieval.py       # Knowledge retrieval logic
-│       │   ├── prompt.py          # Grounded prompt templates
-│       │   ├── generation.py      # LLM answer generation
-│       │   └── rag_service.py     # End-to-end RAG orchestrator
+│       ├── models/              # ORM Models (Customer, Order, Ticket, Refund)
+│       ├── rag/                 # RAG Module (Loader, Chunker, Embeddings, Chroma)
+│       ├── services/            # LLM Chat Service
+│       ├── tools/               # Tool Definitions & Dispatcher
+│       │   ├── available_tools.py # Central registry of approved tools
+│       │   ├── tool_executer.py   # Dispatcher and execution allowlist
+│       │   ├── order_tools.py     # Order retrieval tool
+│       │   ├── customer_tools.py  # Customer lookup tool
+│       │   ├── cancellation_tools.py # Order cancellation tool
+│       │   ├── ticket_tools.py    # Ticketing tool
+│       │   ├── refund_tools.py    # Refund request tool
+│       │   └── knowledge_tools.py # RAG knowledge base tool
 │       └── main.py              # FastAPI Application Entrypoint
-├── guides/                      # Project Guides & Documentation
+├── frontend/                    # React UI Chat Interface
+├── guides/                      # Learning Logs, Errors & Architecture Docs
 ├── knowledge_base/              # Support Policies & FAQ Documents
 ├── requirements.txt             # Python Dependencies
 └── README.md
@@ -118,8 +141,9 @@ uvicorn backend.app.main:app --reload
 
 ## 🧪 Testing
 
-Run tests for the RAG modules:
+Run tests for the tools and RAG modules:
 ```bash
+pytest backend/app/tools/
 pytest backend/app/rag/
 ```
 
@@ -129,9 +153,10 @@ pytest backend/app/rag/
 
 - [x] **Phase 1**: Basic LLM Chat & Session Memory
 - [x] **Phase 2**: RAG Integration (ChromaDB + Gemini Embeddings)
-- [ ] **Phase 3**: Customer Tools & Order Management
+- [x] **Phase 3**: Tool Calling & Function Execution
 - [ ] **Phase 4**: Agentic Orchestration
 - [ ] **Phase 5**: Advanced Guardrails & Text-to-SQL
 - [ ] **Phase 6**: Observability & Cost Tracking
 - [ ] **Phase 7**: Evaluation Framework
 - [ ] **Phase 8**: Deployment & Containerization
+
