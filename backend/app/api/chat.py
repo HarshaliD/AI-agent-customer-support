@@ -1,22 +1,21 @@
-from fastapi import APIRouter, Request
+from fastapi import APIRouter
 from sqlalchemy import select
-from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
 
 from backend.app.schemas.chat import ChatRequest
 from backend.app.database.database import SessionLocal
 from backend.app.models.conversation import Conversation
 from backend.app.models.message import Message
-from backend.app.services.chat_service import get_ai_response
 
-from backend.app.rag.retrieval import retrieve_documents, build_context
-from backend.app.rag.prompt import rag_prompt
+from backend.app.services.chat_service import model_with_tools
+from backend.app.tools.tool_executer import execute_tool
 
 
 router = APIRouter()
 
 
 @router.post("/chat")
-def chat(request: ChatRequest, http_request: Request):
+def chat(request: ChatRequest):
     db = SessionLocal()
 
     try:
@@ -53,9 +52,15 @@ def chat(request: ChatRequest, http_request: Request):
 
         # 4. Convert database messages into LangChain messages
         chat_history = []
-        recent_messages = messages[-10:] if len(messages) > 10 else messages
+
+        recent_messages = (
+            messages[-10:]
+            if len(messages) > 10
+            else messages
+        )
 
         for message in recent_messages:
+
             if message.role == "user":
                 chat_history.append(
                     HumanMessage(content=message.content)
@@ -66,43 +71,53 @@ def chat(request: ChatRequest, http_request: Request):
                     AIMessage(content=message.content)
                 )
 
-        # 5. Get the shared Chroma vector store
-        vector_store = http_request.app.state.vector_store
+        # 5. Use conversation history,
+        # including the current user message
+        chat_messages = chat_history
 
-        # 6. Retrieve relevant knowledge
-        results = retrieve_documents(
-            vector_store,
-            request.message,
-            k=2,
-        )
+        # 6. Run the Gemini + tool loop
+        while True:
 
-        # 7. Build context from retrieved chunks
-        context = build_context(results)
+            response = model_with_tools.invoke(chat_messages)
 
-        # 8. Create the RAG prompt
-        prompt = rag_prompt.invoke({
-            "chat_history": chat_history,
-            "context": context,
-            "question": request.message,
-        })
+            # If Gemini does not request a tool,
+            # it has produced the final answer.
+            if not response.tool_calls:
+                break
 
-        # 9. Send prompt to Gemini
-        response = get_ai_response([message for message in prompt.messages])
+            # Add Gemini's tool request to the conversation
+            chat_messages.append(response)
 
-        # 10. Save Gemini's response
+            # Execute each requested tool
+            for tool_call in response.tool_calls:
+
+                tool_result = execute_tool(tool_call)
+
+                # Send the tool result back to Gemini
+                chat_messages.append(
+                    ToolMessage(
+                        content=str(tool_result),
+                        tool_call_id=tool_call["id"],
+                    )
+                )
+
+        # 7. Extract Gemini's final response
+        response_text = response.text
+
+        # 8. Save Gemini's response
         assistant_message = Message(
             conversation_id=conversation_id,
             role="assistant",
-            content=str(response)
+            content=str(response_text)
         )
 
         db.add(assistant_message)
         db.commit()
 
-        # 11. Return response
+        # 9. Return response to frontend
         return {
             "conversation_id": conversation_id,
-            "response": response
+            "response": response_text
         }
 
     finally:
