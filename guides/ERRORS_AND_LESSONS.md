@@ -352,3 +352,127 @@ For example:
 - Order not found → expected tool result
 - Database connection failure → unexpected tool failure
 
+---
+
+# PHASE 4 — ERRORS & LESSONS
+
+## 1. Initial Intent Routing Using Substring Matching Was Unreliable
+
+### Error
+
+The initial routing logic checked whether the returned intent contained the word `"ORDER"`.
+
+Example:
+
+```python
+if "ORDER" in state["intent"].upper():
+```
+
+Gemini returned a natural-language response containing the word "order", which could incorrectly route the request to the order workflow.
+
+### Cause
+
+The LLM response was not constrained to a fixed structured intent.
+
+### Fix
+
+Introduced Pydantic structured output with `Literal`:
+
+```python
+class IntentResult(BaseModel):
+    intent: Literal[
+        "ORDER_STATUS",
+        "ORDER_CANCELLATION",
+        "GENERAL_QUERY"
+    ]
+```
+
+The router now checks the exact intent value.
+
+### Lesson
+
+Do not use loose substring matching for important workflow routing.
+
+Use structured output when the application expects a fixed set of values.
+
+---
+
+## 2. SupportState Was Accidentally Undefined
+
+### Error
+
+After modifying `workflow.py`, Uvicorn failed to start with:
+
+```text
+NameError: name 'SupportState' is not defined
+```
+
+The error occurred at:
+
+```python
+def understand_request(state: SupportState):
+```
+
+### Cause
+
+The required imports at the top of `workflow.py` were accidentally removed while modifying the file.
+
+### Fix
+
+Restored:
+
+```python
+from backend.app.schemas.workflow import SupportState, IntentResult
+```
+
+along with the other required imports.
+
+### Lesson
+
+When replacing individual functions in a Python module, preserve the module-level imports used by the rest of the file.
+
+---
+
+## 3. Multi-Turn Reference Initially Failed
+
+### Error
+
+This conversation initially failed:
+
+> User: Where is my order ORD-10245?
+> User: Can I cancel it?
+
+The second message resulted in:
+
+> *"I'm sorry, but I couldn't find that order."*
+
+### Cause
+
+The conversation history was being stored in MySQL and retrieved by the API, but it was not being passed into the LangGraph workflow.
+
+Therefore, the second workflow execution did not know which order "it" referred to.
+
+### Fix
+
+Added `chat_history` to `SupportState`.
+
+The API now passes the retrieved conversation history into the workflow.
+
+`understand_request` uses the previous conversation together with the current user message.
+
+### Result
+
+The same conversation then worked:
+
+> User: Where is my order ORD-10245?
+> Assistant: Your order ORD-10245 has been shipped.
+> User: Can I cancel it?
+> Assistant: Order ORD-10245 cannot be cancelled because its current status is 'shipped'.
+
+### Lesson
+
+Storing conversation history is not enough.
+
+The active workflow must receive the relevant conversation context.
+
+

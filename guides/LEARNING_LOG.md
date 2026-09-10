@@ -744,3 +744,606 @@ This leads directly into later concepts such as:
 - Escalation
 
 These are intentionally not implemented as part of Phase 3.
+
+---
+
+# Phase 4 — Agent Workflow
+
+## Goal
+
+Build a structured agent workflow using LangGraph so customer requests can be understood, routed through appropriate workflows, connected to tools/RAG, and completed through explicit state transitions.
+
+---
+
+## 1. Why Agent Workflows?
+
+Phase 3 introduced tool calling.
+
+Phase 3 flow:
+
+User
+→ Gemini
+→ Tool Call
+→ Application executes tool
+→ Tool Result
+→ Gemini
+→ Final Response
+
+Phase 4 introduces explicit workflow orchestration.
+
+The workflow provides structure around:
+
+- request understanding
+- state
+- routing
+- conditional decisions
+- tool execution
+- final response generation
+
+Conceptual flow:
+
+User
+→ FastAPI
+→ LangGraph Workflow
+→ Nodes / Routing
+→ Tools or RAG
+→ Final Response
+
+---
+
+## 2. Workflow
+
+A workflow is a structured sequence of steps that can contain:
+
+- nodes
+- edges
+- conditional branches
+- tool calls
+- final responses
+
+Example cancellation workflow:
+
+User wants cancellation
+→ Understand request
+→ Extract order ID
+→ Get order
+→ Check order status
+→ Route based on status
+→ Cancel if eligible
+→ Return response
+
+---
+
+## 3. State
+
+State contains the information currently available to the workflow.
+
+Created:
+
+`backend/app/schemas/workflow.py`
+
+Our `SupportState` contains:
+
+- `user_message`
+- `chat_history`
+- `intent`
+- `order_id`
+- `order_result`
+- `knowledge_result`
+- `final_response`
+
+State allows information produced by one node to be used by later nodes.
+
+Example:
+
+`understand_request`
+
+extracts:
+
+`order_id = ORD-10245`
+
+That value is stored in state and later used by the order/cancellation workflow.
+
+---
+
+## 4. Nodes
+
+A LangGraph node is an ordinary Python function registered with the graph.
+
+Example:
+
+```python
+graph.add_node("order_flow", order_flow)
+```
+
+The string is the LangGraph node name.
+
+The Python function performs the actual work.
+
+Nodes implemented include:
+
+- `understand_request`
+- `order_flow`
+- `cancellation_flow`
+- `general_flow`
+- `generate_response`
+- `order_not_found`
+- `cancellation_eligible`
+- `cancellation_completed`
+- `cancellation_not_eligible`
+
+---
+
+## 5. Edges
+
+Edges connect nodes and determine workflow movement.
+
+Example:
+
+```python
+graph.add_edge(
+    "general_flow",
+    "generate_response"
+)
+```
+
+This creates a fixed transition from `general_flow` to `generate_response`.
+
+---
+
+## 6. Conditional Edges
+
+Conditional edges allow the workflow to branch based on the current state.
+
+Example:
+
+```python
+graph.add_conditional_edges(
+    "understand_request",
+    route_by_intent
+)
+```
+
+The routing function examines the state and returns the next node.
+
+Intent routing:
+
+ORDER_STATUS
+    ↓
+order_flow
+
+ORDER_CANCELLATION
+    ↓
+cancellation_flow
+
+GENERAL_QUERY
+    ↓
+general_flow
+
+---
+
+## 7. Routing vs Node
+
+Important distinction:
+
+Routing answers:
+
+"WHERE should the workflow go?"
+
+A node answers:
+
+"WHAT work should be performed?"
+
+For example:
+
+`route_cancellation_result()`
+
+decides whether the workflow should go to:
+
+- `order_not_found`
+- `cancellation_eligible`
+- `cancellation_not_eligible`
+
+It does not perform the cancellation itself.
+
+---
+
+## 8. Structured Output for Intent Classification
+
+Initially, intent routing used substring matching.
+
+Example:
+
+```python
+if "ORDER" in state["intent"].upper():
+```
+
+This was unreliable because Gemini could return natural-language text containing the word "order" instead of a clean intent.
+
+We changed the workflow to use Pydantic structured output.
+
+```python
+class IntentResult(BaseModel):
+    intent: Literal[
+        "ORDER_STATUS",
+        "ORDER_CANCELLATION",
+        "GENERAL_QUERY"
+    ]
+    order_id: str
+```
+
+This provides a predictable structure for the workflow.
+
+Pydantic defines the expected structure and allowed values.
+
+Gemini performs the semantic classification.
+
+The router uses the structured intent to select the workflow branch.
+
+---
+
+## 9. Order ID Extraction
+
+The workflow also extracts an order ID from the customer message.
+
+Example:
+
+> Can I cancel my order ORD-10245?
+
+Structured result:
+
+- `intent = ORDER_CANCELLATION`
+- `order_id = ORD-10245`
+
+If the current message does not contain an order ID, the workflow can use conversation history to determine whether the customer is referring to an order from an earlier message.
+
+---
+
+## 10. MySQL Conversation Memory → Workflow State
+
+Phase 1 and Phase 2 already stored conversation history in MySQL.
+
+Phase 4 connected that persistent memory to the workflow.
+
+Flow:
+
+MySQL
+ ↓
+Retrieve recent messages
+ ↓
+Convert to LangChain messages
+ ↓
+chat_history
+ ↓
+SupportState
+ ↓
+understand_request
+
+Important distinction:
+
+MySQL stores persistent conversation memory.
+
+SupportState contains the active information available during the current workflow execution.
+
+---
+
+## 11. Multi-Turn Context
+
+The workflow initially failed to understand:
+
+> Where is my order ORD-10245?
+> Can I cancel it?
+
+The second message resulted in an order-not-found response.
+
+Cause:
+
+The conversation was stored in MySQL, but the workflow was not receiving the previous conversation history.
+
+Therefore the second workflow execution had no order ID.
+
+We added `chat_history` to `SupportState` and provided previous conversation messages to `understand_request`.
+
+After the change:
+
+User:
+Where is my order ORD-10245?
+
+Assistant:
+Your order ORD-10245 has been shipped.
+
+User:
+Can I cancel it?
+
+Assistant:
+Order ORD-10245 cannot be cancelled because its current status is 'shipped'.
+
+This confirmed that the workflow could use previous conversation context to resolve the reference "it".
+
+---
+
+## 12. Order Status Workflow
+
+The order-status workflow is:
+
+START
+ ↓
+understand_request
+ ↓
+ORDER_STATUS
+ ↓
+order_flow
+ ↓
+get_order
+ ↓
+route_order_result
+
+Branches:
+
+Order not found
+ ↓
+order_not_found
+ ↓
+END
+
+or:
+
+Order found
+ ↓
+generate_response
+ ↓
+END
+
+---
+
+## 13. Cancellation Workflow
+
+The cancellation workflow is:
+
+START
+ ↓
+understand_request
+ ↓
+ORDER_CANCELLATION
+ ↓
+cancellation_flow
+ ↓
+get_order
+ ↓
+route_cancellation_result
+
+Branches:
+
+Order not found
+ ↓
+order_not_found
+ ↓
+END
+
+Processing
+ ↓
+cancellation_eligible
+ ↓
+cancel_order
+ ↓
+cancellation_completed
+ ↓
+END
+
+Other status
+ ↓
+cancellation_not_eligible
+ ↓
+END
+
+The `cancel_order` tool performs the actual database mutation.
+
+Guardrails and human approval are intentionally not implemented yet because they belong to Phase 5.
+
+---
+
+## 14. RAG Inside the Workflow
+
+The existing Phase 2 RAG system was reused as a workflow capability.
+
+For a general knowledge question:
+
+User
+ ↓
+understand_request
+ ↓
+GENERAL_QUERY
+ ↓
+general_flow
+ ↓
+search_knowledge_base
+ ↓
+generate_response
+ ↓
+END
+
+This allows the workflow to decide which path should use the knowledge base.
+
+---
+
+## 15. FastAPI Integration
+
+The Phase 3 Gemini tool loop was removed from the `/chat` endpoint.
+
+Previously:
+
+`/chat`
+ ↓
+Gemini + while tool loop
+ ↓
+`execute_tool()`
+ ↓
+Final response
+
+Phase 4:
+
+`/chat`
+ ↓
+Create/retrieve conversation
+ ↓
+Save user message
+ ↓
+Retrieve conversation history
+ ↓
+Create `SupportState`
+ ↓
+`workflow.invoke()`
+ ↓
+Extract `final_response`
+ ↓
+Save assistant response
+ ↓
+Return response
+
+The API remains responsible for conversation persistence.
+
+LangGraph is responsible for workflow orchestration.
+
+---
+
+## 16. Phase 4 Testing
+
+Successfully tested:
+
+- General RAG questions
+- Return policy
+- Shipping policy
+- Existing order lookup
+- Nonexistent order lookup
+- Cancellation of shipped orders
+- Structured intent classification
+- Order ID extraction
+- Cancellation workflow
+- Multi-turn conversation context
+- FastAPI → LangGraph integration
+
+### Existing order
+
+Test:
+
+> Where is my order ORD-10245?
+
+Result:
+
+The system correctly identified the order as shipped and returned tracking number TRK123.
+
+### Nonexistent order
+
+Test:
+
+> Where is my order ORD-99999?
+
+Result:
+
+The system correctly reported that the order was not found and did not invent an order status.
+
+### Cancellation of shipped order
+
+Test:
+
+> Can I cancel order ORD-10245?
+
+Result:
+
+The system checked the actual database status and rejected cancellation because the order was shipped.
+
+### Cancellation of processing order
+
+Test:
+
+> Can I cancel my order ORD-6FC673CE? (status = processing)
+
+Result:
+
+The workflow extracted `ORD-6FC673CE`, checked database status, routed to `cancellation_eligible`, executed `cancel_order`, updated status to `cancelled`, and routed to `cancellation_completed` with the confirmation response:
+> Your order ORD-6FC673CE has been cancelled successfully.
+
+### Multi-turn
+
+Test:
+
+> Where is my order ORD-10245?
+> Can I cancel it?
+
+Result:
+
+The second request correctly resolved "it" to `ORD-10245` using `chat_history`, checked the order, and rejected cancellation because the order was shipped.
+
+---
+
+## 17. Phase 3 vs Phase 4 Detailed Comparison
+
+The fundamental shift between Phase 3 and Phase 4 is:
+- **Phase 3 tested tool capability**: Can the LLM select and call our tools?
+- **Phase 4 tested workflow orchestration**: Can the application control a reliable multi-step support process around those tools?
+
+### 🧪 Test Comparison Matrix
+
+| Test Scenario | Phase 3 (Tool Calling) | Phase 4 (Workflow Orchestration) |
+|---|---|---|
+| **Return policy** | Gemini called `search_knowledge_base` tool directly | `understand_request` → `GENERAL_QUERY` intent → `general_flow` knowledge search → response generation |
+| **Order status** | Gemini called `get_order` tool directly | `understand_request` → `ORDER_STATUS` intent → `order_flow` → `get_order` → `route_order_result` → response |
+| **Non-existent order** | Tool returned error message to Gemini | `get_order` returns `None` → `route_order_result` routes to dedicated `order_not_found` node → controlled response |
+| **Cancellation (Shipped)** | Gemini could attempt `cancel_order`, tool rejected it | `understand_request` → `ORDER_CANCELLATION` → `get_order` → inspect status (`shipped`) → `cancellation_not_eligible` node |
+| **Cancellation (Processing)** | Tool successfully cancelled order when called | `understand_request` → `cancellation_flow` → `get_order` → `processing` → `cancellation_eligible` → `cancel_order` → `cancellation_completed` |
+| **Multiple operations** | Gemini called `get_order`, `get_customer`, `create_ticket` sequentially in tool loop | The workflow Graph explicitly controls execution flow and state transitions |
+| **Invalid Customer ID** | Gemini hallucinated customer ID `ORD-10245` in tool argument | Highlights need for explicit workflow routing & application validation (Phase 5 guardrails) |
+| **Multi-turn Context** | Tool loop executed, but history integration into tool state was basic | Conversation history explicitly populated into `SupportState.chat_history` before workflow invocation |
+| **"Can I cancel it?"** | Depended entirely on LLM prompt window | Passed explicitly: `chat_history` → Gemini resolves reference "it" to `ORD-10245` → structured routing to `cancellation_flow` |
+
+---
+
+## 18. Phase 3 vs Phase 4 Architecture & mental model
+
+### Phase 3 Architecture: What tool should I use?
+```text
+User
+ ↓
+Gemini
+ ↓
+Tool selection
+ ↓
+Tool execution
+ ↓
+Tool result
+ ↓
+Gemini
+ ↓
+Final Response
+```
+*Goal: Give the LLM capabilities.*
+
+### Phase 4 Architecture: What step should happen next?
+```text
+User
+ ↓
+FastAPI
+ ↓
+MySQL (Retrieve history)
+ ↓
+SupportState (user_message + chat_history)
+ ↓
+understand_request (Pydantic Intent Classification)
+ ↓
+LangGraph Router (Conditional Edges)
+ ├── ORDER_STATUS ─────► order_flow ──► get_order ──► route_order_result ──► generate_response
+ ├── ORDER_CANCELLATION ► cancellation_flow ──► get_order ──► eligibility check ──► cancel_order
+ └── GENERAL_QUERY ────► general_flow ──► search_knowledge_base ──► generate_response
+ ↓
+Final Response Saved & Returned
+```
+*Goal: Application controls the workflow process around those capabilities.*
+
+---
+
+## 📓 Notebook Key Takeaways
+
+- **Phase 3 = Tool capability**: Gemini decides which tool to request.
+- **Phase 4 = Workflow orchestration**: The workflow decides what step should happen next after each result.
+- **Phase 3 question**: *"What tool should I use?"*
+- **Phase 4 question**: *"What step should happen next?"*

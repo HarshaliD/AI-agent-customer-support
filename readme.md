@@ -1,12 +1,12 @@
 # AI Customer Support Agent
 
-An AI-powered customer support agent built with **FastAPI, LangChain, Google Gemini, ChromaDB, and MySQL**.
+An AI-powered customer support agent built with **FastAPI, LangChain, Google Gemini, ChromaDB, LangGraph, and MySQL**.
 
 ---
 
 ## 🚀 Overview
 
-This repository is built incrementally following an 8-phase project guide. Currently, **Phase 1 (Basic LLM Chat)**, **Phase 2 (RAG Integration)**, and **Phase 3 (Tool Calling)** are fully implemented.
+This repository is built incrementally following an 8-phase project guide. Currently, **Phase 1 (Basic LLM Chat)**, **Phase 2 (RAG Integration)**, **Phase 3 (Tool Calling)**, and **Phase 4 (Agent Workflows & LangGraph Orchestration)** are fully implemented.
 
 ---
 
@@ -40,6 +40,16 @@ This repository is built incrementally following an 8-phase project guide. Curre
   - `search_knowledge_base`: Wraps RAG retrieval system as a tool so Gemini dynamically queries company knowledge.
 - **Multi-Turn Tool Execution Loop**: Autonomous processing loop handling multi-step tool calls, converting outputs to `ToolMessage` instances, and multi-turn context support.
 
+### Phase 4 — Agent Workflows & LangGraph Orchestration
+- **LangGraph Workflow Engine**: Replaced ad-hoc tool loops with a compiled `StateGraph` state machine for explicit request understanding, routing, and node transitions.
+- **Structured State Management**: `SupportState` schema tracking `user_message`, `chat_history`, `intent`, `order_id`, `order_result`, `knowledge_result`, and `final_response`.
+- **Pydantic Structured Intent Routing**: Replaced substring matching with strict Pydantic `IntentResult` classification (`Literal["ORDER_STATUS", "ORDER_CANCELLATION", "GENERAL_QUERY"]`).
+- **Multi-Branch Business Logic & Controlled Errors**:
+  - **Order Status Flow**: Retrieves order status and handles nonexistent order cases gracefully via dedicated `order_not_found` node.
+  - **Order Cancellation Flow**: Inspects live database status, routes between `cancellation_eligible` and `cancellation_not_eligible` nodes, and executes state mutations safely via `cancel_order`.
+  - **General Knowledge RAG Flow**: Routes policy/FAQ questions directly to `search_knowledge_base` retrieval.
+- **Multi-Turn Context & Pronoun Resolution**: Integrates persistent MySQL chat history into `SupportState.chat_history` so the workflow resolves follow-up references (e.g. *"Can I cancel it?"*) to earlier order context (`ORD-10245`).
+
 ---
 
 ## 🏗️ System Architecture
@@ -50,32 +60,41 @@ Client
   ▼
 FastAPI (POST /chat)
   │
-  ├─► Save & Retrieve Conversation Memory (MySQL)
+  ├─► Save User Message & Retrieve Conversation History (MySQL)
   │
-  └─► Gemini LLM (with bind_tools)
-        │
-        ├── LLM requests tool call ──┐
-        │                            │
-        │                            ▼
-        │                  Tool Dispatcher (tool_executer.py)
-        │                            │
-        │      ┌─────────────────────┴─────────────────────┐
-        │      ▼                                           ▼
-        │  MySQL Tools                              RAG Tool
-        │  (get_order, cancel_order,                (search_knowledge_base)
-        │   create_ticket, etc.)                           │
-        │      │                                           ▼
-        │      │                                  Chroma Similarity Search
-        │      │                                           │
-        │      └─────────────────────┬─────────────────────┘
-        │                            │
-        │                            ▼
-        │                     ToolMessage Result
-        │                            │
-        └◄─── Return Tool Result ────┘
-        │
-        ▼
-  Final Response Saved to MySQL & Sent to Client
+  ▼
+SupportState (user_message + chat_history)
+  │
+  ▼
+LangGraph Workflow Engine (workflow.py)
+  │
+  ▼
+understand_request (Pydantic Intent Classification & Order ID Extraction)
+  │
+  ├─────────────── Conditional Intent Router ───────────────┐
+  │                             │                           │
+  ▼                             ▼                           ▼
+ORDER_STATUS               ORDER_CANCELLATION         GENERAL_QUERY
+  │                             │                           │
+order_flow                 cancellation_flow           general_flow
+  │                             │                           │
+get_order (MySQL)          get_order (MySQL)          search_knowledge_base
+  │                             │                     (ChromaDB RAG)
+route_order_result         route_cancellation_result       │
+  │                             │                           │
+  ├──► order_not_found          ├──► order_not_found        │
+  │                             ├──► cancellation_not_eligible
+  └──► generate_response        └──► cancellation_eligible  │
+                                             │               │
+                                        cancel_order         │
+                                             │               │
+                                      cancellation_completed │
+  ┌──────────────────────────────────────────┴───────────────┘
+  ▼
+final_response
+  │
+  ▼
+Save Assistant Response to MySQL & Return Response to Client
 ```
 
 ---
@@ -86,11 +105,16 @@ FastAPI (POST /chat)
 AI-Agent-Customer-Support/
 ├── backend/
 │   └── app/
+│       ├── agents/
+│       │   └── workflow.py      # LangGraph Workflow Engine & Nodes
 │       ├── api/
-│       │   └── chat.py          # FastAPI Chat Endpoint & Tool Loop
+│       │   └── chat.py          # FastAPI Chat Endpoint & Workflow Invocation
 │       ├── db/                  # MySQL Database & SQLAlchemy Models
 │       ├── models/              # ORM Models (Customer, Order, Ticket, Refund)
 │       ├── rag/                 # RAG Module (Loader, Chunker, Embeddings, Chroma)
+│       ├── schemas/
+│       │   ├── chat.py          # Chat request/response validation schemas
+│       │   └── workflow.py      # SupportState & IntentResult schemas
 │       ├── services/            # LLM Chat Service
 │       ├── tools/               # Tool Definitions & Dispatcher
 │       │   ├── available_tools.py # Central registry of approved tools
@@ -104,6 +128,10 @@ AI-Agent-Customer-Support/
 │       └── main.py              # FastAPI Application Entrypoint
 ├── frontend/                    # React UI Chat Interface
 ├── guides/                      # Learning Logs, Errors & Architecture Docs
+│   ├── LEARNING_LOG.md
+│   ├── ERRORS_AND_LESSONS.md
+│   ├── ARCHITECTURE.md
+│   └── AI_Customer_Support_Agent_Project_Guide.md
 ├── knowledge_base/              # Support Policies & FAQ Documents
 ├── requirements.txt             # Python Dependencies
 └── README.md
@@ -154,9 +182,10 @@ pytest backend/app/rag/
 - [x] **Phase 1**: Basic LLM Chat & Session Memory
 - [x] **Phase 2**: RAG Integration (ChromaDB + Gemini Embeddings)
 - [x] **Phase 3**: Tool Calling & Function Execution
-- [ ] **Phase 4**: Agentic Orchestration
+- [x] **Phase 4**: Agentic Orchestration & LangGraph Workflows
 - [ ] **Phase 5**: Advanced Guardrails & Text-to-SQL
 - [ ] **Phase 6**: Observability & Cost Tracking
 - [ ] **Phase 7**: Evaluation Framework
 - [ ] **Phase 8**: Deployment & Containerization
+
 

@@ -1,14 +1,15 @@
 from fastapi import APIRouter
 from sqlalchemy import select
-from langchain_core.messages import HumanMessage, AIMessage, ToolMessage
+from langchain_core.messages import HumanMessage, AIMessage
 
 from backend.app.schemas.chat import ChatRequest
+from backend.app.schemas.workflow import SupportState
+
 from backend.app.database.database import SessionLocal
 from backend.app.models.conversation import Conversation
 from backend.app.models.message import Message
 
-from backend.app.services.chat_service import model_with_tools
-from backend.app.tools.tool_executer import execute_tool
+from backend.app.agents.workflow import workflow
 
 
 router = APIRouter()
@@ -71,40 +72,23 @@ def chat(request: ChatRequest):
                     AIMessage(content=message.content)
                 )
 
-        # 5. Use conversation history,
-        # including the current user message
-        chat_messages = chat_history
+        # 5. Create the initial workflow state
+        initial_state: SupportState = {
+            "user_message": request.message,
+            "chat_history": chat_history,
+            "intent": "",
+            "order_id": "",
+            "order_result": {},
+            "knowledge_result": "",
+            "final_response": ""
+        }
+        # 6. Run the LangGraph workflow
+        result = workflow.invoke(initial_state)
 
-        # 6. Run the Gemini + tool loop
-        while True:
+        # 7. Extract the final response
+        response_text = result["final_response"]
 
-            response = model_with_tools.invoke(chat_messages)
-
-            # If Gemini does not request a tool,
-            # it has produced the final answer.
-            if not response.tool_calls:
-                break
-
-            # Add Gemini's tool request to the conversation
-            chat_messages.append(response)
-
-            # Execute each requested tool
-            for tool_call in response.tool_calls:
-
-                tool_result = execute_tool(tool_call)
-
-                # Send the tool result back to Gemini
-                chat_messages.append(
-                    ToolMessage(
-                        content=str(tool_result),
-                        tool_call_id=tool_call["id"],
-                    )
-                )
-
-        # 7. Extract Gemini's final response
-        response_text = response.text
-
-        # 8. Save Gemini's response
+        # 8. Save assistant response
         assistant_message = Message(
             conversation_id=conversation_id,
             role="assistant",
