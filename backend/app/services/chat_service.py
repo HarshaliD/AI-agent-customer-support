@@ -21,6 +21,7 @@ model = ChatGoogleGenerativeAI(
 )
 
 
+#PHASE 3 -> NOT USED CURRENTLY
 # Gemini model with all approved tools
 model_with_tools = model.bind_tools(AVAILABLE_TOOLS)
 

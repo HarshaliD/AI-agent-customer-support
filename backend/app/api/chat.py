@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from sqlalchemy import select
+from datetime import datetime
 from langchain_core.messages import HumanMessage, AIMessage
 
 from backend.app.schemas.chat import ChatRequest
@@ -17,24 +18,42 @@ router = APIRouter()
 
 @router.post("/chat")
 def chat(request: ChatRequest):
+
     db = SessionLocal()
 
     try:
-        # 1. Create a new conversation if this is the first message
+
+        # ----------------------------------------------------
+        # Create or reuse conversation
+        # ----------------------------------------------------
+
         if request.conversation_id is None:
+
             conversation = Conversation()
 
             db.add(conversation)
             db.commit()
-            db.refresh(conversation)
+            db.refresh(conversation)   #SQLAlchemy, go to the database, look at the row we just saved, and update my Python object with whatever is currently in that row.
 
             conversation_id = conversation.id
 
         else:
-            # Continue an existing conversation
-            conversation_id = request.conversation_id
+            conversation = db.get(
+                Conversation,
+                request.conversation_id
+            )
 
-        # 2. Save the user's message
+            conversation.updated_at = datetime.utcnow()
+
+            db.commit()
+
+            conversation_id = conversation.id
+
+
+        # ----------------------------------------------------
+        # Save user message
+        # ----------------------------------------------------
+
         user_message = Message(
             conversation_id=conversation_id,
             role="user",
@@ -44,14 +63,20 @@ def chat(request: ChatRequest):
         db.add(user_message)
         db.commit()
 
-        # 3. Retrieve conversation history
+
+        # ----------------------------------------------------
+        # Retrieve conversation history
+        # ----------------------------------------------------
+
         messages = db.execute(
             select(Message)
-            .where(Message.conversation_id == conversation_id)
+            .where(
+                Message.conversation_id == conversation_id
+            )
             .order_by(Message.created_at)
         ).scalars().all()
 
-        # 4. Convert database messages into LangChain messages
+
         chat_history = []
 
         recent_messages = (
@@ -60,35 +85,72 @@ def chat(request: ChatRequest):
             else messages
         )
 
+
         for message in recent_messages:
 
             if message.role == "user":
+
                 chat_history.append(
-                    HumanMessage(content=message.content)
+                    HumanMessage(
+                        content=message.content
+                    )
                 )
 
             elif message.role == "assistant":
+
                 chat_history.append(
-                    AIMessage(content=message.content)
+                    AIMessage(
+                        content=message.content
+                    )
                 )
 
-        # 5. Create the initial workflow state
+
+        # ----------------------------------------------------
+        # Initial workflow state
+        # ----------------------------------------------------
+
         initial_state: SupportState = {
+
             "user_message": request.message,
+
             "chat_history": chat_history,
+
             "intent": "",
+
             "order_id": "",
+
             "order_result": {},
+
             "knowledge_result": "",
+
+            "refund_amount": 0.0,
+
+            "refund_valid": False,
+
+            "approval_required": False,
+
+            "approval_status": "not_required",
+
             "final_response": ""
         }
-        # 6. Run the LangGraph workflow
-        result = workflow.invoke(initial_state)
 
-        # 7. Extract the final response
+
+        # ----------------------------------------------------
+        # Run workflow
+        # ----------------------------------------------------
+
+        result = workflow.invoke(
+            initial_state
+        )
+
+
         response_text = result["final_response"]
 
-        # 8. Save assistant response
+
+        # ----------------------------------------------------
+        # Save assistant response
+        # ----------------------------------------------------
+
         assistant_message = Message(
             conversation_id=conversation_id,
             role="assistant",
@@ -98,11 +160,17 @@ def chat(request: ChatRequest):
         db.add(assistant_message)
         db.commit()
 
-        # 9. Return response to frontend
+
+        # ----------------------------------------------------
+        # Return response
+        # ----------------------------------------------------
+
         return {
             "conversation_id": conversation_id,
             "response": response_text
         }
 
+
     finally:
+
         db.close()

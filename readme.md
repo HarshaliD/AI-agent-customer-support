@@ -54,48 +54,7 @@ This repository is built incrementally following an 8-phase project guide. Curre
 
 ## 🏗️ System Architecture
 
-```text
-Client
-  │
-  ▼
-FastAPI (POST /chat)
-  │
-  ├─► Save User Message & Retrieve Conversation History (MySQL)
-  │
-  ▼
-SupportState (user_message + chat_history)
-  │
-  ▼
-LangGraph Workflow Engine (workflow.py)
-  │
-  ▼
-understand_request (Pydantic Intent Classification & Order ID Extraction)
-  │
-  ├─────────────── Conditional Intent Router ───────────────┐
-  │                             │                           │
-  ▼                             ▼                           ▼
-ORDER_STATUS               ORDER_CANCELLATION         GENERAL_QUERY
-  │                             │                           │
-order_flow                 cancellation_flow           general_flow
-  │                             │                           │
-get_order (MySQL)          get_order (MySQL)          search_knowledge_base
-  │                             │                     (ChromaDB RAG)
-route_order_result         route_cancellation_result       │
-  │                             │                           │
-  ├──► order_not_found          ├──► order_not_found        │
-  │                             ├──► cancellation_not_eligible
-  └──► generate_response        └──► cancellation_eligible  │
-                                             │               │
-                                        cancel_order         │
-                                             │               │
-                                      cancellation_completed │
-  ┌──────────────────────────────────────────┴───────────────┘
-  ▼
-final_response
-  │
-  ▼
-Save Assistant Response to MySQL & Return Response to Client
-```
+![AI Agent Customer Support - Workflow Diagram](./architecture%20workflow.png)
 
 ---
 
