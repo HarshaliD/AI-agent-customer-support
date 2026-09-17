@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from sqlalchemy import select
 from datetime import datetime
+
 from langchain_core.messages import HumanMessage, AIMessage
 
 from backend.app.schemas.chat import ChatRequest
@@ -23,9 +24,9 @@ def chat(request: ChatRequest):
 
     try:
 
-        # ----------------------------------------------------
-        # Create or reuse conversation
-        # ----------------------------------------------------
+        # ====================================================
+        # 1. GET OR CREATE CONVERSATION
+        # ====================================================
 
         if request.conversation_id is None:
 
@@ -33,15 +34,21 @@ def chat(request: ChatRequest):
 
             db.add(conversation)
             db.commit()
-            db.refresh(conversation)   #SQLAlchemy, go to the database, look at the row we just saved, and update my Python object with whatever is currently in that row.
+            db.refresh(conversation)
 
             conversation_id = conversation.id
 
         else:
+
             conversation = db.get(
                 Conversation,
                 request.conversation_id
             )
+
+            if conversation is None:
+                return {
+                    "error": "Conversation not found."
+                }
 
             conversation.updated_at = datetime.utcnow()
 
@@ -50,9 +57,9 @@ def chat(request: ChatRequest):
             conversation_id = conversation.id
 
 
-        # ----------------------------------------------------
-        # Save user message
-        # ----------------------------------------------------
+        # ====================================================
+        # 2. SAVE USER MESSAGE
+        # ====================================================
 
         user_message = Message(
             conversation_id=conversation_id,
@@ -64,9 +71,9 @@ def chat(request: ChatRequest):
         db.commit()
 
 
-        # ----------------------------------------------------
-        # Retrieve conversation history
-        # ----------------------------------------------------
+        # ====================================================
+        # 3. GET CONVERSATION HISTORY
+        # ====================================================
 
         messages = db.execute(
             select(Message)
@@ -105,11 +112,12 @@ def chat(request: ChatRequest):
                 )
 
 
-        # ----------------------------------------------------
-        # Initial workflow state
-        # ----------------------------------------------------
+        # ====================================================
+        # 4. CREATE INITIAL WORKFLOW STATE
+        # ====================================================
 
         initial_state: SupportState = {
+            "conversation_id": conversation_id,
 
             "user_message": request.message,
 
@@ -131,13 +139,21 @@ def chat(request: ChatRequest):
 
             "approval_status": "not_required",
 
+            # Load persistent cancellation state
+            # from the Conversation table.
+            "pending_action": conversation.pending_action,
+
+            "pending_order_id": conversation.pending_order_id,
+
+            "user_confirmation": None,
+
             "final_response": ""
         }
 
 
-        # ----------------------------------------------------
-        # Run workflow
-        # ----------------------------------------------------
+        # ====================================================
+        # 5. RUN WORKFLOW
+        # ====================================================
 
         result = workflow.invoke(
             initial_state
@@ -147,9 +163,26 @@ def chat(request: ChatRequest):
         response_text = result["final_response"]
 
 
-        # ----------------------------------------------------
-        # Save assistant response
-        # ----------------------------------------------------
+        # ====================================================
+        # 6. SAVE UPDATED PENDING STATE
+        # ====================================================
+
+        conversation.pending_action = (
+            result["pending_action"]
+        )
+
+        conversation.pending_order_id = (
+            result["pending_order_id"]
+        )
+
+        conversation.updated_at = datetime.utcnow()
+
+        db.commit()
+
+
+        # ====================================================
+        # 7. SAVE ASSISTANT RESPONSE
+        # ====================================================
 
         assistant_message = Message(
             conversation_id=conversation_id,
@@ -158,12 +191,13 @@ def chat(request: ChatRequest):
         )
 
         db.add(assistant_message)
+
         db.commit()
 
 
-        # ----------------------------------------------------
-        # Return response
-        # ----------------------------------------------------
+        # ====================================================
+        # 8. RETURN RESPONSE
+        # ====================================================
 
         return {
             "conversation_id": conversation_id,
@@ -173,4 +207,5 @@ def chat(request: ChatRequest):
 
     finally:
 
+        # Always close the SQLAlchemy session.
         db.close()

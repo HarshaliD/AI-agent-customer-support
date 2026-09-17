@@ -54,7 +54,11 @@ This repository is built incrementally following an 8-phase project guide. Curre
 
 ## 🏗️ System Architecture
 
-![AI Agent Customer Support - Workflow Diagram](./architecture%20workflow.png)
+### 1. Request-Response & Database Architecture
+![AI Agent Customer Support - System Architecture](./architecture_diagram.png)
+
+### 2. LangGraph Agent Workflow (Phases 1 – 7)
+![AI Agent Customer Support - Workflow Diagram](./workflow_diagram.png)
 
 ---
 
@@ -85,6 +89,10 @@ AI-Agent-Customer-Support/
 │       │   ├── refund_tools.py    # Refund request tool
 │       │   └── knowledge_tools.py # RAG knowledge base tool
 │       └── main.py              # FastAPI Application Entrypoint
+├── evaluation/                  # Automated evaluation suite & benchmarks
+│   ├── evaluator.py             # Evaluation runner & metrics calculation
+│   ├── test_cases.json          # Curated test cases
+│   └── results.json             # Benchmark output results
 ├── frontend/                    # React UI Chat Interface
 ├── guides/                      # Learning Logs, Errors & Architecture Docs
 │   ├── LEARNING_LOG.md
@@ -133,6 +141,29 @@ Run tests for the tools and RAG modules:
 pytest backend/app/tools/
 pytest backend/app/rag/
 ```
+
+Run agent evaluation:
+```bash
+python evaluation/evaluator.py
+```
+
+---
+
+## 📊 Evaluation
+
+The agent was evaluated on 30 curated test cases covering order status, cancellations, refunds, RAG queries, and edge cases.  
+The results provide a baseline measurement of intent understanding, tool selection, workflow behavior, and execution reliability.
+
+| Metric | Result |
+|---|---:|
+| Intent Accuracy | **96.67%** |
+| Tool Selection Accuracy | **96.67%** |
+| Behavior Accuracy | **93.33%** |
+| Execution Success | **96.67%** |
+| Average Latency | **4.74 sec** |
+| Test Cases | **30** |
+
+> **Note:** The behavior score includes one Gemini API rate-limit failure and one evaluation expectation mismatch. The agent's core workflow behavior was otherwise successful across the tested scenarios.
 
 ---
 

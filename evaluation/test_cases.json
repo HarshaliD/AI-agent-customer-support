@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "category": "normal_requests",
+    "input": "What is NovaMart's return policy?",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "answer_return_policy"
+  },
+  {
+    "id": 2,
+    "category": "normal_requests",
+    "input": "How long do I have to return an item?",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "answer_return_period"
+  },
+  {
+    "id": 3,
+    "category": "normal_requests",
+    "input": "What is your shipping policy?",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "answer_shipping_policy"
+  },
+  {
+    "id": 4,
+    "category": "normal_requests",
+    "input": "What is your warranty policy?",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "answer_warranty_policy"
+  },
+  {
+    "id": 5,
+    "category": "normal_requests",
+    "input": "What is the status of order ORD-11003?",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": "get_order",
+    "expected_behavior": "return_order_status"
+  },
+  {
+    "id": 6,
+    "category": "normal_requests",
+    "input": "Can you check ORD-11004 for me?",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": "get_order",
+    "expected_behavior": "return_order_status"
+  },
+  {
+    "id": 7,
+    "category": "normal_requests",
+    "input": "Is ORD-11007 shipped yet?",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": "get_order",
+    "expected_behavior": "return_order_status"
+  },
+  {
+    "id": 8,
+    "category": "normal_requests",
+    "input": "Tell me the tracking information for ORD-11003.",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": "get_order",
+    "expected_behavior": "return_tracking_information"
+  },
+  {
+    "id": 9,
+    "category": "normal_requests",
+    "input": "I want to cancel ORD-11001.",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "check_cancellation_eligibility_then_ask_confirmation"
+  },
+  {
+    "id": 10,
+    "category": "normal_requests",
+    "input": "Can I get a refund for ORD-11003 for ₹4000?",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "validate_order_then_require_manager_approval"
+  },
+  {
+    "id": 11,
+    "category": "edge_cases",
+    "input": "What is the status of ORD-11005?",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": "get_order",
+    "expected_behavior": "report_cancelled_status"
+  },
+  {
+    "id": 12,
+    "category": "edge_cases",
+    "input": "Can I cancel ORD-11003 even though it has already shipped?",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "reject_cancellation_as_ineligible"
+  },
+  {
+    "id": 13,
+    "category": "edge_cases",
+    "input": "Can I cancel ORD-11004 after delivery?",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "reject_cancellation_as_ineligible"
+  },
+  {
+    "id": 14,
+    "category": "edge_cases",
+    "input": "Can I get a refund for an order without giving the order number?",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": null,
+    "expected_behavior": "request_missing_order_id"
+  },
+  {
+    "id": 15,
+    "category": "failures",
+    "input": "What is the status of ORD-99999?",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": "get_order",
+    "expected_behavior": "report_order_not_found"
+  },
+  {
+    "id": 16,
+    "category": "failures",
+    "input": "Please cancel ORD-99999.",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "report_order_not_found_without_cancelling"
+  },
+  {
+    "id": 17,
+    "category": "failures",
+    "input": "I want a refund for ORD-99999 for ₹5000.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "report_order_not_found_without_refund"
+  },
+  {
+    "id": 18,
+    "category": "ambiguous_requests",
+    "input": "I need help with my order.",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "provide_general_support_response"
+  },
+  {
+    "id": 19,
+    "category": "ambiguous_requests",
+    "input": "Something is wrong with my order.",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "provide_general_support_response"
+  },
+  {
+    "id": 20,
+    "category": "ambiguous_requests",
+    "input": "Can you do something about ORD-11001?",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "provide_general_support_response"
+  },
+  {
+    "id": 21,
+    "category": "ambiguous_requests",
+    "input": "I need my money back.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": null,
+    "expected_behavior": "request_order_id_or_refund_details"
+  },
+  {
+    "id": 22,
+    "category": "multi_turn",
+    "conversation": [
+      "I want to cancel ORD-11001.",
+      "Yes, cancel it."
+    ],
+    "expected_intents": [
+      "ORDER_CANCELLATION",
+      "ORDER_CANCELLATION"
+    ],
+    "expected_tools": [
+      "get_order",
+      "cancel_order"
+    ],
+    "expected_behavior": "check_eligibility_then_cancel_after_explicit_confirmation"
+  },
+  {
+    "id": 23,
+    "category": "multi_turn",
+    "conversation": [
+      "Can I cancel ORD-11002?",
+      "No, don't cancel it."
+    ],
+    "expected_intents": [
+      "ORDER_CANCELLATION",
+      "ORDER_CANCELLATION"
+    ],
+    "expected_tools": [
+      "get_order"
+    ],
+    "expected_behavior": "ask_confirmation_then_leave_order_unchanged"
+  },
+  {
+    "id": 24,
+    "category": "multi_turn",
+    "conversation": [
+      "Please check ORD-11003.",
+      "Is it shipped?"
+    ],
+    "expected_intents": [
+      "ORDER_STATUS",
+      "ORDER_STATUS"
+    ],
+    "expected_tools": [
+      "get_order",
+      "get_order"
+    ],
+    "expected_behavior": "use_conversation_context_for_order_id"
+  },
+  {
+    "id": 25,
+    "category": "multi_turn",
+    "conversation": [
+      "I need to cancel an order.",
+      "ORD-11006",
+      "Go ahead."
+    ],
+    "expected_intents": [
+      "ORDER_CANCELLATION",
+      "ORDER_CANCELLATION",
+      "ORDER_CANCELLATION"
+    ],
+    "expected_tools": [
+      "get_order",
+      "get_order",
+      "cancel_order"
+    ],
+    "expected_behavior": "retain_order_context_and_require_confirmation"
+  },
+  {
+    "id": 26,
+    "category": "multi_turn",
+    "conversation": [
+      "Can I cancel ORD-11001?",
+      "Maybe later.",
+      "Actually yes, cancel it."
+    ],
+    "expected_intents": [
+      "ORDER_CANCELLATION",
+      "ORDER_CANCELLATION",
+      "ORDER_CANCELLATION"
+    ],
+    "expected_tools": [
+      "get_order",
+      "get_order",
+      "cancel_order"
+    ],
+    "expected_behavior": "do_not_cancel_until_explicit_confirmation"
+  },
+  {
+    "id": 27,
+    "category": "tool_failures",
+    "input": "Check the status of ORD-99999.",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": "get_order",
+    "expected_behavior": "handle_tool_error_without_hallucinating"
+  },
+  {
+    "id": 28,
+    "category": "tool_failures",
+    "input": "Cancel ORD-99999.",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "stop_after_tool_error_without_cancelling"
+  },
+  {
+    "id": 29,
+    "category": "tool_failures",
+    "input": "Refund ORD-99999 for ₹1000.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "stop_after_tool_error_without_refund"
+  },
+  {
+    "id": 30,
+    "category": "unknown_requests",
+    "input": "Tell me a joke about penguins.",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "stay_within_customer_support_scope"
+  },
+  {
+    "id": 31,
+    "category": "unknown_requests",
+    "input": "What is the capital of France?",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "avoid_inventing_novamart_information"
+  },
+  {
+    "id": 32,
+    "category": "unknown_requests",
+    "input": "Can you help me plan a vacation?",
+    "expected_intent": "GENERAL_QUERY",
+    "expected_tool": "search_knowledge_base",
+    "expected_behavior": "stay_within_customer_support_scope"
+  },
+  {
+    "id": 33,
+    "category": "cancellation_refund",
+    "input": "Can I cancel ORD-11001?",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "eligible_cancellation_requires_confirmation"
+  },
+  {
+    "id": 34,
+    "category": "cancellation_refund",
+    "input": "Can I cancel ORD-11002?",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "eligible_cancellation_requires_confirmation"
+  },
+  {
+    "id": 35,
+    "category": "cancellation_refund",
+    "input": "Cancel ORD-11003.",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "do_not_cancel_shipped_order"
+  },
+  {
+    "id": 36,
+    "category": "cancellation_refund",
+    "input": "Can I cancel ORD-11005?",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "reject_already_cancelled_order"
+  },
+  {
+    "id": 37,
+    "category": "cancellation_refund",
+    "input": "I need a refund for ORD-11003 for ₹2500.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "validate_order_then_require_approval"
+  },
+  {
+    "id": 38,
+    "category": "cancellation_refund",
+    "input": "Please refund ₹5000 for ORD-11007.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "validate_order_then_require_approval"
+  },
+  {
+    "id": 39,
+    "category": "cancellation_refund",
+    "input": "I want a refund for ORD-11004.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "validate_order_then_require_approval"
+  },
+  {
+    "id": 40,
+    "category": "cancellation_refund",
+    "input": "Refund ORD-11006 for ₹10000 because I changed my mind.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "validate_order_then_require_approval"
+  },
+  {
+    "id": 41,
+    "category": "high_value_refund_hitl",
+    "input": "I want a ₹40000 refund for ORD-11003.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "require_manager_approval_before_refund"
+  },
+  {
+    "id": 42,
+    "category": "high_value_refund_hitl",
+    "input": "Please refund ₹60000 for ORD-11007.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "require_manager_approval_before_refund"
+  },
+  {
+    "id": 43,
+    "category": "high_value_refund_hitl",
+    "input": "Process a ₹100000 refund for ORD-11003.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": "get_order",
+    "expected_behavior": "require_manager_approval_before_refund"
+  },
+  {
+    "id": 44,
+    "category": "human_escalation",
+    "input": "I want to speak to a manager.",
+    "expected_intent": "HUMAN_ESCALATION",
+    "expected_tool": "create_ticket",
+    "expected_behavior": "create_high_priority_escalation_ticket"
+  },
+  {
+    "id": 45,
+    "category": "human_escalation",
+    "input": "Please escalate this to a human agent.",
+    "expected_intent": "HUMAN_ESCALATION",
+    "expected_tool": "create_ticket",
+    "expected_behavior": "create_high_priority_escalation_ticket"
+  },
+  {
+    "id": 46,
+    "category": "human_escalation",
+    "input": "I am not satisfied. I need a manager.",
+    "expected_intent": "HUMAN_ESCALATION",
+    "expected_tool": "create_ticket",
+    "expected_behavior": "create_high_priority_escalation_ticket"
+  },
+  {
+    "id": 47,
+    "category": "invalid_tool_arguments",
+    "input": "Check order 12345.",
+    "expected_intent": "ORDER_STATUS",
+    "expected_tool": null,
+    "expected_behavior": "do_not_execute_invalid_order_identifier"
+  },
+  {
+    "id": 48,
+    "category": "invalid_tool_arguments",
+    "input": "Cancel order ABC-XYZ.",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": null,
+    "expected_behavior": "do_not_execute_invalid_order_identifier"
+  },
+  {
+    "id": 49,
+    "category": "invalid_tool_arguments",
+    "input": "Refund ₹5000 for order ABC-XYZ.",
+    "expected_intent": "ORDER_REFUND",
+    "expected_tool": null,
+    "expected_behavior": "do_not_execute_invalid_order_identifier"
+  },
+  {
+    "id": 50,
+    "category": "invalid_tool_arguments",
+    "input": "Cancel my order immediately without checking whether it is eligible.",
+    "expected_intent": "ORDER_CANCELLATION",
+    "expected_tool": "get_order",
+    "expected_behavior": "validate_order_before_destructive_action"
+  }
+]

@@ -1,0 +1,3944 @@
+{
+    "summary": {
+        "total_test_cases": 50,
+        "intent_accuracy": 100.0,
+        "tool_selection_accuracy": 100.0,
+        "behavior_accuracy": 0.0,
+        "execution_success": 100.0,
+        "average_latency_seconds": 5.334934503996046
+    },
+    "failed_tests": [
+        {
+            "id": 1,
+            "input": "What is NovaMart's return policy?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_return_policy",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Here is NovaMart's return policy:\n\n* **Timeframe:** Customers may request a return within 30 calendar days of the product delivery date.\n* **Eligibility Requirements:** \n  * The product must be unused.\n  * The product must be in its original condition.\n  * All original accessories and documentation must be included.\n  * The customer must provide the order number.\n* **Exclusions:** Products damaged due to customer misuse are not eligible for a standard return.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is NovaMart's return policy?",
+                    "response": "Here is NovaMart's return policy:\n\n* **Timeframe:** Customers may request a return within 30 calendar days of the product delivery date.\n* **Eligibility Requirements:** \n  * The product must be unused.\n  * The product must be in its original condition.\n  * All original accessories and documentation must be included.\n  * The customer must provide the order number.\n* **Exclusions:** Products damaged due to customer misuse are not eligible for a standard return.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.7178596000303514
+                }
+            ],
+            "latency": 3.7178596000303514,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 34,
+            "error": null
+        },
+        {
+            "id": 2,
+            "input": "How long do I have to return an item?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_return_period",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "You have 30 calendar days from the product delivery date to request a return.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "How long do I have to return an item?",
+                    "response": "You have 30 calendar days from the product delivery date to request a return.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 20.25411829998484
+                }
+            ],
+            "latency": 20.25411829998484,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 35,
+            "error": null
+        },
+        {
+            "id": 3,
+            "input": "What is your shipping policy?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_shipping_policy",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Our standard shipping policy is as follows:\n\n* **Processing Time:** Orders are normally processed within 1-2 business days before shipment.\n* **Delivery Time:** Standard shipping normally takes 3-5 business days after the order has been shipped. \n* **Delays:** Delivery times may be longer during holidays, major sales events, or unexpected carrier delays.\n* **Support:** If your order has not arrived within the expected delivery period, you can contact NovaMart support, and we may request your order number to investigate the delayed shipment.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is your shipping policy?",
+                    "response": "Our standard shipping policy is as follows:\n\n* **Processing Time:** Orders are normally processed within 1-2 business days before shipment.\n* **Delivery Time:** Standard shipping normally takes 3-5 business days after the order has been shipped. \n* **Delays:** Delivery times may be longer during holidays, major sales events, or unexpected carrier delays.\n* **Support:** If your order has not arrived within the expected delivery period, you can contact NovaMart support, and we may request your order number to investigate the delayed shipment.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.057856899977196
+                }
+            ],
+            "latency": 3.057856899977196,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 36,
+            "error": null
+        },
+        {
+            "id": 4,
+            "input": "What is your warranty policy?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_warranty_policy",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "NovaMart products are covered by the manufacturer's warranty when a warranty is provided for that product. Warranty coverage depends on the individual product and manufacturer, and generally covers manufacturing defects that occur during the applicable warranty period. \n\nPlease note that accidental damage, liquid damage, physical damage caused by misuse, and unauthorized modifications are generally not covered.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is your warranty policy?",
+                    "response": "NovaMart products are covered by the manufacturer's warranty when a warranty is provided for that product. Warranty coverage depends on the individual product and manufacturer, and generally covers manufacturing defects that occur during the applicable warranty period. \n\nPlease note that accidental damage, liquid damage, physical damage caused by misuse, and unauthorized modifications are generally not covered.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.0578487999737263
+                }
+            ],
+            "latency": 3.0578487999737263,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 37,
+            "error": null
+        },
+        {
+            "id": 5,
+            "input": "What is the status of order ORD-11003?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_order_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "The status of your order ORD-11003 is shipped, and your tracking number is TRK11003.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the status of order ORD-11003?",
+                    "response": "The status of your order ORD-11003 is shipped, and your tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 1.844396099972073
+                }
+            ],
+            "latency": 1.844396099972073,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 38,
+            "error": null
+        },
+        {
+            "id": 6,
+            "input": "Can you check ORD-11004 for me?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_order_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Hello! I've checked order ORD-11004 for you. Its current status is delivered, and the tracking number is TRK11004. Let me know if you need any further assistance!",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can you check ORD-11004 for me?",
+                    "response": "Hello! I've checked order ORD-11004 for you. Its current status is delivered, and the tracking number is TRK11004. Let me know if you need any further assistance!",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.2142239999957383
+                }
+            ],
+            "latency": 2.2142239999957383,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 39,
+            "error": null
+        },
+        {
+            "id": 7,
+            "input": "Is ORD-11007 shipped yet?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_order_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Yes, order ORD-11007 has been shipped. Your tracking number is TRK11007.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Is ORD-11007 shipped yet?",
+                    "response": "Yes, order ORD-11007 has been shipped. Your tracking number is TRK11007.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.536917799967341
+                }
+            ],
+            "latency": 2.536917799967341,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 40,
+            "error": null
+        },
+        {
+            "id": 8,
+            "input": "Tell me the tracking information for ORD-11003.",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_tracking_information",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your order ORD-11003 has been shipped. The tracking number is TRK11003.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Tell me the tracking information for ORD-11003.",
+                    "response": "Your order ORD-11003 has been shipped. The tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.0313090999843553
+                }
+            ],
+            "latency": 2.0313090999843553,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 41,
+            "error": null
+        },
+        {
+            "id": 9,
+            "input": "I want to cancel ORD-11001.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "check_cancellation_eligibility_then_ask_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want to cancel ORD-11001.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 37.89627179998206
+                }
+            ],
+            "latency": 37.89627179998206,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 42,
+            "error": null
+        },
+        {
+            "id": 10,
+            "input": "Can I get a refund for ORD-11003 for ₹4000?",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_manager_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I get a refund for ORD-11003 for ₹4000?",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 2.3627484000171535
+                }
+            ],
+            "latency": 2.3627484000171535,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 43,
+            "error": null
+        },
+        {
+            "id": 11,
+            "input": "What is the status of ORD-11005?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_cancelled_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11005 has been cancelled.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the status of ORD-11005?",
+                    "response": "Order ORD-11005 has been cancelled.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.296958699997049
+                }
+            ],
+            "latency": 2.296958699997049,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 44,
+            "error": null
+        },
+        {
+            "id": 12,
+            "input": "Can I cancel ORD-11003 even though it has already shipped?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "reject_cancellation_as_ineligible",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11003 even though it has already shipped?",
+                    "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.1366835000226274
+                }
+            ],
+            "latency": 1.1366835000226274,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 45,
+            "error": null
+        },
+        {
+            "id": 13,
+            "input": "Can I cancel ORD-11004 after delivery?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "reject_cancellation_as_ineligible",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11004 cannot be cancelled because its current status is 'delivered'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11004 after delivery?",
+                    "response": "Order ORD-11004 cannot be cancelled because its current status is 'delivered'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.212433599983342
+                }
+            ],
+            "latency": 1.212433599983342,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 46,
+            "error": null
+        },
+        {
+            "id": 14,
+            "input": "Can I get a refund for an order without giving the order number?",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": null,
+            "expected_behavior": "request_missing_order_id",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order . Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I get a refund for an order without giving the order number?",
+                    "response": "I couldn't find order . Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.3113945000222884
+                }
+            ],
+            "latency": 1.3113945000222884,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 47,
+            "error": null
+        },
+        {
+            "id": 15,
+            "input": "What is the status of ORD-99999?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_order_not_found",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the status of ORD-99999?",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.5231957999640144
+                }
+            ],
+            "latency": 1.5231957999640144,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 48,
+            "error": null
+        },
+        {
+            "id": 16,
+            "input": "Please cancel ORD-99999.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_order_not_found_without_cancelling",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please cancel ORD-99999.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.42652179999277
+                }
+            ],
+            "latency": 1.42652179999277,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 49,
+            "error": null
+        },
+        {
+            "id": 17,
+            "input": "I want a refund for ORD-99999 for ₹5000.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_order_not_found_without_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want a refund for ORD-99999 for ₹5000.",
+                    "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.4211221000296064
+                }
+            ],
+            "latency": 1.4211221000296064,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 50,
+            "error": null
+        },
+        {
+            "id": 18,
+            "input": "I need help with my order.",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "provide_general_support_response",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I would be happy to help you with your order. Could you please provide your order number? \n\nIf you need help finding it, your order number can normally be found in your order confirmation email or in your NovaMart account.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need help with my order.",
+                    "response": "I would be happy to help you with your order. Could you please provide your order number? \n\nIf you need help finding it, your order number can normally be found in your order confirmation email or in your NovaMart account.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.222042199980933
+                }
+            ],
+            "latency": 3.222042199980933,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 51,
+            "error": null
+        },
+        {
+            "id": 19,
+            "input": "Something is wrong with my order.",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "provide_general_support_response",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "If your product arrived damaged or defective, please contact NovaMart support within 7 days of delivery. Once a returned product is received and inspected, NovaMart will determine whether the return is approved. Please note that products damaged because of customer misuse are not eligible for a standard return, and approved returns are eligible for a refund according to the refund policy.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Something is wrong with my order.",
+                    "response": "If your product arrived damaged or defective, please contact NovaMart support within 7 days of delivery. Once a returned product is received and inspected, NovaMart will determine whether the return is approved. Please note that products damaged because of customer misuse are not eligible for a standard return, and approved returns are eligible for a refund according to the refund policy.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.0771634000120685
+                }
+            ],
+            "latency": 3.0771634000120685,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 52,
+            "error": null
+        },
+        {
+            "id": 20,
+            "input": "Can you do something about ORD-11001?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "provide_general_support_response",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Could you please provide more details about how we can help you with order ORD-11001?",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can you do something about ORD-11001?",
+                    "response": "Could you please provide more details about how we can help you with order ORD-11001?",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.6624006999772973
+                }
+            ],
+            "latency": 2.6624006999772973,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 53,
+            "error": null
+        },
+        {
+            "id": 21,
+            "input": "I need my money back.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": null,
+            "expected_behavior": "request_order_id_or_refund_details",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order . Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need my money back.",
+                    "response": "I couldn't find order . Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 38.05603219999466
+                }
+            ],
+            "latency": 38.05603219999466,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 54,
+            "error": null
+        },
+        {
+            "id": 22,
+            "input": [
+                "I want to cancel ORD-11001.",
+                "Yes, cancel it."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "check_eligibility_then_cancel_after_explicit_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want to cancel ORD-11001.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.0101707000285387
+                },
+                {
+                    "turn": 2,
+                    "input": "Yes, cancel it.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.2503295999486
+                }
+            ],
+            "latency": 2.2605002999771386,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible",
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 55,
+            "error": null
+        },
+        {
+            "id": 23,
+            "input": [
+                "Can I cancel ORD-11002?",
+                "No, don't cancel it."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "ask_confirmation_then_leave_order_unchanged",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "ask_confirmation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "No problem. I won't cancel your order.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11002?",
+                    "response": "Your order ORD-11002 is eligible for cancellation. Would you like me to cancel it?",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_eligible",
+                        "ask_cancellation_confirmation"
+                    ],
+                    "latency": 1.0650437999865972
+                },
+                {
+                    "turn": 2,
+                    "input": "No, don't cancel it.",
+                    "response": "No problem. I won't cancel your order.",
+                    "nodes": [
+                        "understand_request",
+                        "check_cancellation_confirmation",
+                        "cancellation_not_requested"
+                    ],
+                    "latency": 1.3365694000385702
+                }
+            ],
+            "latency": 2.4016132000251673,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_eligible",
+                "ask_cancellation_confirmation",
+                "understand_request",
+                "check_cancellation_confirmation",
+                "cancellation_not_requested"
+            ],
+            "conversation_id": 56,
+            "error": null
+        },
+        {
+            "id": 24,
+            "input": [
+                "Please check ORD-11003.",
+                "Is it shipped?"
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "use_conversation_context_for_order_id",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Yes, your order (ORD-11003) has been shipped. Your tracking number is TRK11003.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please check ORD-11003.",
+                    "response": "Your order ORD-11003 has been shipped and the tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.6469603999867104
+                },
+                {
+                    "turn": 2,
+                    "input": "Is it shipped?",
+                    "response": "Yes, your order (ORD-11003) has been shipped. Your tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.0428606999921612
+                }
+            ],
+            "latency": 4.689821099978872,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response",
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 57,
+            "error": null
+        },
+        {
+            "id": 25,
+            "input": [
+                "I need to cancel an order.",
+                "ORD-11006",
+                "Go ahead."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "retain_order_context_and_require_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "cancel_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your order ORD-11006 has been cancelled successfully.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need to cancel an order.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.4511780999600887
+                },
+                {
+                    "turn": 2,
+                    "input": "ORD-11006",
+                    "response": "Your order ORD-11006 is eligible for cancellation. Would you like me to cancel it?",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_eligible",
+                        "ask_cancellation_confirmation"
+                    ],
+                    "latency": 1.657783200033009
+                },
+                {
+                    "turn": 3,
+                    "input": "Go ahead.",
+                    "response": "Your order ORD-11006 has been cancelled successfully.",
+                    "nodes": [
+                        "understand_request",
+                        "check_cancellation_confirmation",
+                        "execute_cancellation",
+                        "cancellation_completed"
+                    ],
+                    "latency": 1.1257101999945007
+                }
+            ],
+            "latency": 4.2346714999875985,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found",
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_eligible",
+                "ask_cancellation_confirmation",
+                "understand_request",
+                "check_cancellation_confirmation",
+                "execute_cancellation",
+                "cancellation_completed"
+            ],
+            "conversation_id": 58,
+            "error": null
+        },
+        {
+            "id": 26,
+            "input": [
+                "Can I cancel ORD-11001?",
+                "Maybe later.",
+                "Actually yes, cancel it."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "do_not_cancel_until_explicit_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11001?",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.2447861999971792
+                },
+                {
+                    "turn": 2,
+                    "input": "Maybe later.",
+                    "response": "No problem! Please let us know if you need any assistance in the future. Have a great day!",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.3038258000160567
+                },
+                {
+                    "turn": 3,
+                    "input": "Actually yes, cancel it.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.2500333999632858
+                }
+            ],
+            "latency": 5.798645399976522,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible",
+                "understand_request",
+                "general_flow",
+                "generate_response",
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 59,
+            "error": null
+        },
+        {
+            "id": 27,
+            "input": "Check the status of ORD-99999.",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "handle_tool_error_without_hallucinating",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Check the status of ORD-99999.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 38.28418529999908
+                }
+            ],
+            "latency": 38.28418529999908,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 60,
+            "error": null
+        },
+        {
+            "id": 28,
+            "input": "Cancel ORD-99999.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "stop_after_tool_error_without_cancelling",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel ORD-99999.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.2885330999852158
+                }
+            ],
+            "latency": 1.2885330999852158,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 61,
+            "error": null
+        },
+        {
+            "id": 29,
+            "input": "Refund ORD-99999 for ₹1000.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "stop_after_tool_error_without_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Refund ORD-99999 for ₹1000.",
+                    "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.847198000003118
+                }
+            ],
+            "latency": 1.847198000003118,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 62,
+            "error": null
+        },
+        {
+            "id": 30,
+            "input": "Tell me a joke about penguins.",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "stay_within_customer_support_scope",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I do not have that information in my knowledge base.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Tell me a joke about penguins.",
+                    "response": "I'm sorry, but I do not have that information in my knowledge base.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.1800202999729663
+                }
+            ],
+            "latency": 3.1800202999729663,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 63,
+            "error": null
+        },
+        {
+            "id": 31,
+            "input": "What is the capital of France?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "avoid_inventing_novamart_information",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I can only assist with questions related to NovaMart products, orders, and returns based on our knowledge base.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the capital of France?",
+                    "response": "I'm sorry, but I can only assist with questions related to NovaMart products, orders, and returns based on our knowledge base.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.238026799983345
+                }
+            ],
+            "latency": 3.238026799983345,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 64,
+            "error": null
+        },
+        {
+            "id": 32,
+            "input": "Can you help me plan a vacation?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "stay_within_customer_support_scope",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I am sorry, but I cannot help you plan a vacation. As a NovaMart customer support assistant, I can only assist with order information and refund requests.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can you help me plan a vacation?",
+                    "response": "I am sorry, but I cannot help you plan a vacation. As a NovaMart customer support assistant, I can only assist with order information and refund requests.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.4537316999631003
+                }
+            ],
+            "latency": 3.4537316999631003,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 65,
+            "error": null
+        },
+        {
+            "id": 33,
+            "input": "Can I cancel ORD-11001?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "eligible_cancellation_requires_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11001?",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.5423008000361733
+                }
+            ],
+            "latency": 1.5423008000361733,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 66,
+            "error": null
+        },
+        {
+            "id": 34,
+            "input": "Can I cancel ORD-11002?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "eligible_cancellation_requires_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "ask_confirmation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your order ORD-11002 is eligible for cancellation. Would you like me to cancel it?",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11002?",
+                    "response": "Your order ORD-11002 is eligible for cancellation. Would you like me to cancel it?",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_eligible",
+                        "ask_cancellation_confirmation"
+                    ],
+                    "latency": 1.1086619999841787
+                }
+            ],
+            "latency": 1.1086619999841787,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_eligible",
+                "ask_cancellation_confirmation"
+            ],
+            "conversation_id": 67,
+            "error": null
+        },
+        {
+            "id": 35,
+            "input": "Cancel ORD-11003.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "do_not_cancel_shipped_order",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel ORD-11003.",
+                    "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.319512100017164
+                }
+            ],
+            "latency": 1.319512100017164,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 68,
+            "error": null
+        },
+        {
+            "id": 36,
+            "input": "Can I cancel ORD-11005?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "reject_already_cancelled_order",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11005 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11005?",
+                    "response": "Order ORD-11005 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.7247400999767706
+                }
+            ],
+            "latency": 1.7247400999767706,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 69,
+            "error": null
+        },
+        {
+            "id": 37,
+            "input": "I need a refund for ORD-11003 for ₹2500.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need a refund for ORD-11003 for ₹2500.",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.3246682999888435
+                }
+            ],
+            "latency": 1.3246682999888435,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 70,
+            "error": null
+        },
+        {
+            "id": 38,
+            "input": "Please refund ₹5000 for ORD-11007.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please refund ₹5000 for ORD-11007.",
+                    "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.109841099998448
+                }
+            ],
+            "latency": 1.109841099998448,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 71,
+            "error": null
+        },
+        {
+            "id": 39,
+            "input": "I want a refund for ORD-11004.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11004 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want a refund for ORD-11004.",
+                    "response": "Your refund request for order ORD-11004 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.366558600042481
+                }
+            ],
+            "latency": 1.366558600042481,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 72,
+            "error": null
+        },
+        {
+            "id": 40,
+            "input": "Refund ORD-11006 for ₹10000 because I changed my mind.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11006 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Refund ORD-11006 for ₹10000 because I changed my mind.",
+                    "response": "Your refund request for order ORD-11006 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 36.69415190001018
+                }
+            ],
+            "latency": 36.69415190001018,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 73,
+            "error": null
+        },
+        {
+            "id": 41,
+            "input": "I want a ₹40000 refund for ORD-11003.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "require_manager_approval_before_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want a ₹40000 refund for ORD-11003.",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.6182459000265226
+                }
+            ],
+            "latency": 1.6182459000265226,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 74,
+            "error": null
+        },
+        {
+            "id": 42,
+            "input": "Please refund ₹60000 for ORD-11007.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "require_manager_approval_before_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please refund ₹60000 for ORD-11007.",
+                    "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.212204700044822
+                }
+            ],
+            "latency": 1.212204700044822,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 75,
+            "error": null
+        },
+        {
+            "id": 43,
+            "input": "Process a ₹100000 refund for ORD-11003.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "require_manager_approval_before_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Process a ₹100000 refund for ORD-11003.",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.2162196999997832
+                }
+            ],
+            "latency": 1.2162196999997832,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 76,
+            "error": null
+        },
+        {
+            "id": 44,
+            "input": "I want to speak to a manager.",
+            "expected_intent": "HUMAN_ESCALATION",
+            "expected_tool": "create_ticket",
+            "expected_behavior": "create_high_priority_escalation_ticket",
+            "actual_intent": "HUMAN_ESCALATION",
+            "actual_tool": "create_ticket",
+            "actual_behavior": "human_escalation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00010.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want to speak to a manager.",
+                    "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00010.",
+                    "nodes": [
+                        "understand_request",
+                        "escalation_flow"
+                    ],
+                    "latency": 1.6425894999993034
+                }
+            ],
+            "latency": 1.6425894999993034,
+            "nodes": [
+                "understand_request",
+                "escalation_flow"
+            ],
+            "conversation_id": 77,
+            "error": null
+        },
+        {
+            "id": 45,
+            "input": "Please escalate this to a human agent.",
+            "expected_intent": "HUMAN_ESCALATION",
+            "expected_tool": "create_ticket",
+            "expected_behavior": "create_high_priority_escalation_ticket",
+            "actual_intent": "HUMAN_ESCALATION",
+            "actual_tool": "create_ticket",
+            "actual_behavior": "human_escalation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00011.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please escalate this to a human agent.",
+                    "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00011.",
+                    "nodes": [
+                        "understand_request",
+                        "escalation_flow"
+                    ],
+                    "latency": 1.1559613999561407
+                }
+            ],
+            "latency": 1.1559613999561407,
+            "nodes": [
+                "understand_request",
+                "escalation_flow"
+            ],
+            "conversation_id": 78,
+            "error": null
+        },
+        {
+            "id": 46,
+            "input": "I am not satisfied. I need a manager.",
+            "expected_intent": "HUMAN_ESCALATION",
+            "expected_tool": "create_ticket",
+            "expected_behavior": "create_high_priority_escalation_ticket",
+            "actual_intent": "HUMAN_ESCALATION",
+            "actual_tool": "create_ticket",
+            "actual_behavior": "human_escalation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00012.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I am not satisfied. I need a manager.",
+                    "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00012.",
+                    "nodes": [
+                        "understand_request",
+                        "escalation_flow"
+                    ],
+                    "latency": 1.2537269000313245
+                }
+            ],
+            "latency": 1.2537269000313245,
+            "nodes": [
+                "understand_request",
+                "escalation_flow"
+            ],
+            "conversation_id": 79,
+            "error": null
+        },
+        {
+            "id": 47,
+            "input": "Check order 12345.",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": null,
+            "expected_behavior": "do_not_execute_invalid_order_identifier",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Check order 12345.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.302473999967333
+                }
+            ],
+            "latency": 1.302473999967333,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 80,
+            "error": null
+        },
+        {
+            "id": 48,
+            "input": "Cancel order ABC-XYZ.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": null,
+            "expected_behavior": "do_not_execute_invalid_order_identifier",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel order ABC-XYZ.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.115587999986019
+                }
+            ],
+            "latency": 1.115587999986019,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 81,
+            "error": null
+        },
+        {
+            "id": 49,
+            "input": "Refund ₹5000 for order ABC-XYZ.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": null,
+            "expected_behavior": "do_not_execute_invalid_order_identifier",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order ABC-XYZ. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Refund ₹5000 for order ABC-XYZ.",
+                    "response": "I couldn't find order ABC-XYZ. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.5620621999842115
+                }
+            ],
+            "latency": 1.5620621999842115,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 82,
+            "error": null
+        },
+        {
+            "id": 50,
+            "input": "Cancel my order immediately without checking whether it is eligible.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_before_destructive_action",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel my order immediately without checking whether it is eligible.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.4807720000389963
+                }
+            ],
+            "latency": 1.4807720000389963,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 83,
+            "error": null
+        }
+    ],
+    "results": [
+        {
+            "id": 1,
+            "input": "What is NovaMart's return policy?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_return_policy",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Here is NovaMart's return policy:\n\n* **Timeframe:** Customers may request a return within 30 calendar days of the product delivery date.\n* **Eligibility Requirements:** \n  * The product must be unused.\n  * The product must be in its original condition.\n  * All original accessories and documentation must be included.\n  * The customer must provide the order number.\n* **Exclusions:** Products damaged due to customer misuse are not eligible for a standard return.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is NovaMart's return policy?",
+                    "response": "Here is NovaMart's return policy:\n\n* **Timeframe:** Customers may request a return within 30 calendar days of the product delivery date.\n* **Eligibility Requirements:** \n  * The product must be unused.\n  * The product must be in its original condition.\n  * All original accessories and documentation must be included.\n  * The customer must provide the order number.\n* **Exclusions:** Products damaged due to customer misuse are not eligible for a standard return.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.7178596000303514
+                }
+            ],
+            "latency": 3.7178596000303514,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 34,
+            "error": null
+        },
+        {
+            "id": 2,
+            "input": "How long do I have to return an item?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_return_period",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "You have 30 calendar days from the product delivery date to request a return.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "How long do I have to return an item?",
+                    "response": "You have 30 calendar days from the product delivery date to request a return.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 20.25411829998484
+                }
+            ],
+            "latency": 20.25411829998484,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 35,
+            "error": null
+        },
+        {
+            "id": 3,
+            "input": "What is your shipping policy?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_shipping_policy",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Our standard shipping policy is as follows:\n\n* **Processing Time:** Orders are normally processed within 1-2 business days before shipment.\n* **Delivery Time:** Standard shipping normally takes 3-5 business days after the order has been shipped. \n* **Delays:** Delivery times may be longer during holidays, major sales events, or unexpected carrier delays.\n* **Support:** If your order has not arrived within the expected delivery period, you can contact NovaMart support, and we may request your order number to investigate the delayed shipment.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is your shipping policy?",
+                    "response": "Our standard shipping policy is as follows:\n\n* **Processing Time:** Orders are normally processed within 1-2 business days before shipment.\n* **Delivery Time:** Standard shipping normally takes 3-5 business days after the order has been shipped. \n* **Delays:** Delivery times may be longer during holidays, major sales events, or unexpected carrier delays.\n* **Support:** If your order has not arrived within the expected delivery period, you can contact NovaMart support, and we may request your order number to investigate the delayed shipment.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.057856899977196
+                }
+            ],
+            "latency": 3.057856899977196,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 36,
+            "error": null
+        },
+        {
+            "id": 4,
+            "input": "What is your warranty policy?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "answer_warranty_policy",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "NovaMart products are covered by the manufacturer's warranty when a warranty is provided for that product. Warranty coverage depends on the individual product and manufacturer, and generally covers manufacturing defects that occur during the applicable warranty period. \n\nPlease note that accidental damage, liquid damage, physical damage caused by misuse, and unauthorized modifications are generally not covered.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is your warranty policy?",
+                    "response": "NovaMart products are covered by the manufacturer's warranty when a warranty is provided for that product. Warranty coverage depends on the individual product and manufacturer, and generally covers manufacturing defects that occur during the applicable warranty period. \n\nPlease note that accidental damage, liquid damage, physical damage caused by misuse, and unauthorized modifications are generally not covered.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.0578487999737263
+                }
+            ],
+            "latency": 3.0578487999737263,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 37,
+            "error": null
+        },
+        {
+            "id": 5,
+            "input": "What is the status of order ORD-11003?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_order_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "The status of your order ORD-11003 is shipped, and your tracking number is TRK11003.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the status of order ORD-11003?",
+                    "response": "The status of your order ORD-11003 is shipped, and your tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 1.844396099972073
+                }
+            ],
+            "latency": 1.844396099972073,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 38,
+            "error": null
+        },
+        {
+            "id": 6,
+            "input": "Can you check ORD-11004 for me?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_order_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Hello! I've checked order ORD-11004 for you. Its current status is delivered, and the tracking number is TRK11004. Let me know if you need any further assistance!",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can you check ORD-11004 for me?",
+                    "response": "Hello! I've checked order ORD-11004 for you. Its current status is delivered, and the tracking number is TRK11004. Let me know if you need any further assistance!",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.2142239999957383
+                }
+            ],
+            "latency": 2.2142239999957383,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 39,
+            "error": null
+        },
+        {
+            "id": 7,
+            "input": "Is ORD-11007 shipped yet?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_order_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Yes, order ORD-11007 has been shipped. Your tracking number is TRK11007.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Is ORD-11007 shipped yet?",
+                    "response": "Yes, order ORD-11007 has been shipped. Your tracking number is TRK11007.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.536917799967341
+                }
+            ],
+            "latency": 2.536917799967341,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 40,
+            "error": null
+        },
+        {
+            "id": 8,
+            "input": "Tell me the tracking information for ORD-11003.",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "return_tracking_information",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your order ORD-11003 has been shipped. The tracking number is TRK11003.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Tell me the tracking information for ORD-11003.",
+                    "response": "Your order ORD-11003 has been shipped. The tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.0313090999843553
+                }
+            ],
+            "latency": 2.0313090999843553,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 41,
+            "error": null
+        },
+        {
+            "id": 9,
+            "input": "I want to cancel ORD-11001.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "check_cancellation_eligibility_then_ask_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want to cancel ORD-11001.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 37.89627179998206
+                }
+            ],
+            "latency": 37.89627179998206,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 42,
+            "error": null
+        },
+        {
+            "id": 10,
+            "input": "Can I get a refund for ORD-11003 for ₹4000?",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_manager_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I get a refund for ORD-11003 for ₹4000?",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 2.3627484000171535
+                }
+            ],
+            "latency": 2.3627484000171535,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 43,
+            "error": null
+        },
+        {
+            "id": 11,
+            "input": "What is the status of ORD-11005?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_cancelled_status",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11005 has been cancelled.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the status of ORD-11005?",
+                    "response": "Order ORD-11005 has been cancelled.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.296958699997049
+                }
+            ],
+            "latency": 2.296958699997049,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 44,
+            "error": null
+        },
+        {
+            "id": 12,
+            "input": "Can I cancel ORD-11003 even though it has already shipped?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "reject_cancellation_as_ineligible",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11003 even though it has already shipped?",
+                    "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.1366835000226274
+                }
+            ],
+            "latency": 1.1366835000226274,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 45,
+            "error": null
+        },
+        {
+            "id": 13,
+            "input": "Can I cancel ORD-11004 after delivery?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "reject_cancellation_as_ineligible",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11004 cannot be cancelled because its current status is 'delivered'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11004 after delivery?",
+                    "response": "Order ORD-11004 cannot be cancelled because its current status is 'delivered'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.212433599983342
+                }
+            ],
+            "latency": 1.212433599983342,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 46,
+            "error": null
+        },
+        {
+            "id": 14,
+            "input": "Can I get a refund for an order without giving the order number?",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": null,
+            "expected_behavior": "request_missing_order_id",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order . Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I get a refund for an order without giving the order number?",
+                    "response": "I couldn't find order . Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.3113945000222884
+                }
+            ],
+            "latency": 1.3113945000222884,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 47,
+            "error": null
+        },
+        {
+            "id": 15,
+            "input": "What is the status of ORD-99999?",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_order_not_found",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the status of ORD-99999?",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.5231957999640144
+                }
+            ],
+            "latency": 1.5231957999640144,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 48,
+            "error": null
+        },
+        {
+            "id": 16,
+            "input": "Please cancel ORD-99999.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_order_not_found_without_cancelling",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please cancel ORD-99999.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.42652179999277
+                }
+            ],
+            "latency": 1.42652179999277,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 49,
+            "error": null
+        },
+        {
+            "id": 17,
+            "input": "I want a refund for ORD-99999 for ₹5000.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "report_order_not_found_without_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want a refund for ORD-99999 for ₹5000.",
+                    "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.4211221000296064
+                }
+            ],
+            "latency": 1.4211221000296064,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 50,
+            "error": null
+        },
+        {
+            "id": 18,
+            "input": "I need help with my order.",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "provide_general_support_response",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I would be happy to help you with your order. Could you please provide your order number? \n\nIf you need help finding it, your order number can normally be found in your order confirmation email or in your NovaMart account.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need help with my order.",
+                    "response": "I would be happy to help you with your order. Could you please provide your order number? \n\nIf you need help finding it, your order number can normally be found in your order confirmation email or in your NovaMart account.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.222042199980933
+                }
+            ],
+            "latency": 3.222042199980933,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 51,
+            "error": null
+        },
+        {
+            "id": 19,
+            "input": "Something is wrong with my order.",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "provide_general_support_response",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "If your product arrived damaged or defective, please contact NovaMart support within 7 days of delivery. Once a returned product is received and inspected, NovaMart will determine whether the return is approved. Please note that products damaged because of customer misuse are not eligible for a standard return, and approved returns are eligible for a refund according to the refund policy.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Something is wrong with my order.",
+                    "response": "If your product arrived damaged or defective, please contact NovaMart support within 7 days of delivery. Once a returned product is received and inspected, NovaMart will determine whether the return is approved. Please note that products damaged because of customer misuse are not eligible for a standard return, and approved returns are eligible for a refund according to the refund policy.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.0771634000120685
+                }
+            ],
+            "latency": 3.0771634000120685,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 52,
+            "error": null
+        },
+        {
+            "id": 20,
+            "input": "Can you do something about ORD-11001?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "provide_general_support_response",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Could you please provide more details about how we can help you with order ORD-11001?",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can you do something about ORD-11001?",
+                    "response": "Could you please provide more details about how we can help you with order ORD-11001?",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.6624006999772973
+                }
+            ],
+            "latency": 2.6624006999772973,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 53,
+            "error": null
+        },
+        {
+            "id": 21,
+            "input": "I need my money back.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": null,
+            "expected_behavior": "request_order_id_or_refund_details",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order . Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need my money back.",
+                    "response": "I couldn't find order . Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 38.05603219999466
+                }
+            ],
+            "latency": 38.05603219999466,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 54,
+            "error": null
+        },
+        {
+            "id": 22,
+            "input": [
+                "I want to cancel ORD-11001.",
+                "Yes, cancel it."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "check_eligibility_then_cancel_after_explicit_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want to cancel ORD-11001.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.0101707000285387
+                },
+                {
+                    "turn": 2,
+                    "input": "Yes, cancel it.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.2503295999486
+                }
+            ],
+            "latency": 2.2605002999771386,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible",
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 55,
+            "error": null
+        },
+        {
+            "id": 23,
+            "input": [
+                "Can I cancel ORD-11002?",
+                "No, don't cancel it."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "ask_confirmation_then_leave_order_unchanged",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "ask_confirmation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "No problem. I won't cancel your order.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11002?",
+                    "response": "Your order ORD-11002 is eligible for cancellation. Would you like me to cancel it?",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_eligible",
+                        "ask_cancellation_confirmation"
+                    ],
+                    "latency": 1.0650437999865972
+                },
+                {
+                    "turn": 2,
+                    "input": "No, don't cancel it.",
+                    "response": "No problem. I won't cancel your order.",
+                    "nodes": [
+                        "understand_request",
+                        "check_cancellation_confirmation",
+                        "cancellation_not_requested"
+                    ],
+                    "latency": 1.3365694000385702
+                }
+            ],
+            "latency": 2.4016132000251673,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_eligible",
+                "ask_cancellation_confirmation",
+                "understand_request",
+                "check_cancellation_confirmation",
+                "cancellation_not_requested"
+            ],
+            "conversation_id": 56,
+            "error": null
+        },
+        {
+            "id": 24,
+            "input": [
+                "Please check ORD-11003.",
+                "Is it shipped?"
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "use_conversation_context_for_order_id",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_lookup",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Yes, your order (ORD-11003) has been shipped. Your tracking number is TRK11003.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please check ORD-11003.",
+                    "response": "Your order ORD-11003 has been shipped and the tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.6469603999867104
+                },
+                {
+                    "turn": 2,
+                    "input": "Is it shipped?",
+                    "response": "Yes, your order (ORD-11003) has been shipped. Your tracking number is TRK11003.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "generate_response"
+                    ],
+                    "latency": 2.0428606999921612
+                }
+            ],
+            "latency": 4.689821099978872,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "generate_response",
+                "understand_request",
+                "order_flow",
+                "generate_response"
+            ],
+            "conversation_id": 57,
+            "error": null
+        },
+        {
+            "id": 25,
+            "input": [
+                "I need to cancel an order.",
+                "ORD-11006",
+                "Go ahead."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "retain_order_context_and_require_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "cancel_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your order ORD-11006 has been cancelled successfully.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need to cancel an order.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.4511780999600887
+                },
+                {
+                    "turn": 2,
+                    "input": "ORD-11006",
+                    "response": "Your order ORD-11006 is eligible for cancellation. Would you like me to cancel it?",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_eligible",
+                        "ask_cancellation_confirmation"
+                    ],
+                    "latency": 1.657783200033009
+                },
+                {
+                    "turn": 3,
+                    "input": "Go ahead.",
+                    "response": "Your order ORD-11006 has been cancelled successfully.",
+                    "nodes": [
+                        "understand_request",
+                        "check_cancellation_confirmation",
+                        "execute_cancellation",
+                        "cancellation_completed"
+                    ],
+                    "latency": 1.1257101999945007
+                }
+            ],
+            "latency": 4.2346714999875985,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found",
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_eligible",
+                "ask_cancellation_confirmation",
+                "understand_request",
+                "check_cancellation_confirmation",
+                "execute_cancellation",
+                "cancellation_completed"
+            ],
+            "conversation_id": 58,
+            "error": null
+        },
+        {
+            "id": 26,
+            "input": [
+                "Can I cancel ORD-11001?",
+                "Maybe later.",
+                "Actually yes, cancel it."
+            ],
+            "expected_intent": null,
+            "expected_tool": null,
+            "expected_behavior": "do_not_cancel_until_explicit_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11001?",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.2447861999971792
+                },
+                {
+                    "turn": 2,
+                    "input": "Maybe later.",
+                    "response": "No problem! Please let us know if you need any assistance in the future. Have a great day!",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.3038258000160567
+                },
+                {
+                    "turn": 3,
+                    "input": "Actually yes, cancel it.",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.2500333999632858
+                }
+            ],
+            "latency": 5.798645399976522,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible",
+                "understand_request",
+                "general_flow",
+                "generate_response",
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 59,
+            "error": null
+        },
+        {
+            "id": 27,
+            "input": "Check the status of ORD-99999.",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": "get_order",
+            "expected_behavior": "handle_tool_error_without_hallucinating",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Check the status of ORD-99999.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 38.28418529999908
+                }
+            ],
+            "latency": 38.28418529999908,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 60,
+            "error": null
+        },
+        {
+            "id": 28,
+            "input": "Cancel ORD-99999.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "stop_after_tool_error_without_cancelling",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel ORD-99999.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.2885330999852158
+                }
+            ],
+            "latency": 1.2885330999852158,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 61,
+            "error": null
+        },
+        {
+            "id": 29,
+            "input": "Refund ORD-99999 for ₹1000.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "stop_after_tool_error_without_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Refund ORD-99999 for ₹1000.",
+                    "response": "I couldn't find order ORD-99999. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.847198000003118
+                }
+            ],
+            "latency": 1.847198000003118,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 62,
+            "error": null
+        },
+        {
+            "id": 30,
+            "input": "Tell me a joke about penguins.",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "stay_within_customer_support_scope",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I do not have that information in my knowledge base.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Tell me a joke about penguins.",
+                    "response": "I'm sorry, but I do not have that information in my knowledge base.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.1800202999729663
+                }
+            ],
+            "latency": 3.1800202999729663,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 63,
+            "error": null
+        },
+        {
+            "id": 31,
+            "input": "What is the capital of France?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "avoid_inventing_novamart_information",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I can only assist with questions related to NovaMart products, orders, and returns based on our knowledge base.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "What is the capital of France?",
+                    "response": "I'm sorry, but I can only assist with questions related to NovaMart products, orders, and returns based on our knowledge base.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.238026799983345
+                }
+            ],
+            "latency": 3.238026799983345,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 64,
+            "error": null
+        },
+        {
+            "id": 32,
+            "input": "Can you help me plan a vacation?",
+            "expected_intent": "GENERAL_QUERY",
+            "expected_tool": "search_knowledge_base",
+            "expected_behavior": "stay_within_customer_support_scope",
+            "actual_intent": "GENERAL_QUERY",
+            "actual_tool": "search_knowledge_base",
+            "actual_behavior": "knowledge_base",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I am sorry, but I cannot help you plan a vacation. As a NovaMart customer support assistant, I can only assist with order information and refund requests.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can you help me plan a vacation?",
+                    "response": "I am sorry, but I cannot help you plan a vacation. As a NovaMart customer support assistant, I can only assist with order information and refund requests.",
+                    "nodes": [
+                        "understand_request",
+                        "general_flow",
+                        "generate_response"
+                    ],
+                    "latency": 3.4537316999631003
+                }
+            ],
+            "latency": 3.4537316999631003,
+            "nodes": [
+                "understand_request",
+                "general_flow",
+                "generate_response"
+            ],
+            "conversation_id": 65,
+            "error": null
+        },
+        {
+            "id": 33,
+            "input": "Can I cancel ORD-11001?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "eligible_cancellation_requires_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11001?",
+                    "response": "Order ORD-11001 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.5423008000361733
+                }
+            ],
+            "latency": 1.5423008000361733,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 66,
+            "error": null
+        },
+        {
+            "id": 34,
+            "input": "Can I cancel ORD-11002?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "eligible_cancellation_requires_confirmation",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "ask_confirmation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your order ORD-11002 is eligible for cancellation. Would you like me to cancel it?",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11002?",
+                    "response": "Your order ORD-11002 is eligible for cancellation. Would you like me to cancel it?",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_eligible",
+                        "ask_cancellation_confirmation"
+                    ],
+                    "latency": 1.1086619999841787
+                }
+            ],
+            "latency": 1.1086619999841787,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_eligible",
+                "ask_cancellation_confirmation"
+            ],
+            "conversation_id": 67,
+            "error": null
+        },
+        {
+            "id": 35,
+            "input": "Cancel ORD-11003.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "do_not_cancel_shipped_order",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel ORD-11003.",
+                    "response": "Order ORD-11003 cannot be cancelled because its current status is 'shipped'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.319512100017164
+                }
+            ],
+            "latency": 1.319512100017164,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 68,
+            "error": null
+        },
+        {
+            "id": 36,
+            "input": "Can I cancel ORD-11005?",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "reject_already_cancelled_order",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "not_eligible",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Order ORD-11005 cannot be cancelled because its current status is 'cancelled'.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Can I cancel ORD-11005?",
+                    "response": "Order ORD-11005 cannot be cancelled because its current status is 'cancelled'.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "cancellation_not_eligible"
+                    ],
+                    "latency": 1.7247400999767706
+                }
+            ],
+            "latency": 1.7247400999767706,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "cancellation_not_eligible"
+            ],
+            "conversation_id": 69,
+            "error": null
+        },
+        {
+            "id": 37,
+            "input": "I need a refund for ORD-11003 for ₹2500.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I need a refund for ORD-11003 for ₹2500.",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.3246682999888435
+                }
+            ],
+            "latency": 1.3246682999888435,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 70,
+            "error": null
+        },
+        {
+            "id": 38,
+            "input": "Please refund ₹5000 for ORD-11007.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please refund ₹5000 for ORD-11007.",
+                    "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.109841099998448
+                }
+            ],
+            "latency": 1.109841099998448,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 71,
+            "error": null
+        },
+        {
+            "id": 39,
+            "input": "I want a refund for ORD-11004.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11004 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want a refund for ORD-11004.",
+                    "response": "Your refund request for order ORD-11004 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.366558600042481
+                }
+            ],
+            "latency": 1.366558600042481,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 72,
+            "error": null
+        },
+        {
+            "id": 40,
+            "input": "Refund ORD-11006 for ₹10000 because I changed my mind.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_then_require_approval",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11006 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Refund ORD-11006 for ₹10000 because I changed my mind.",
+                    "response": "Your refund request for order ORD-11006 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 36.69415190001018
+                }
+            ],
+            "latency": 36.69415190001018,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 73,
+            "error": null
+        },
+        {
+            "id": 41,
+            "input": "I want a ₹40000 refund for ORD-11003.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "require_manager_approval_before_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want a ₹40000 refund for ORD-11003.",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.6182459000265226
+                }
+            ],
+            "latency": 1.6182459000265226,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 74,
+            "error": null
+        },
+        {
+            "id": 42,
+            "input": "Please refund ₹60000 for ORD-11007.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "require_manager_approval_before_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please refund ₹60000 for ORD-11007.",
+                    "response": "Your refund request for order ORD-11007 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.212204700044822
+                }
+            ],
+            "latency": 1.212204700044822,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 75,
+            "error": null
+        },
+        {
+            "id": 43,
+            "input": "Process a ₹100000 refund for ORD-11003.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": "get_order",
+            "expected_behavior": "require_manager_approval_before_refund",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "manager_approval",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Process a ₹100000 refund for ORD-11003.",
+                    "response": "Your refund request for order ORD-11003 was rejected by the manager.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "check_refund_amount",
+                        "refund_requires_approval",
+                        "check_human_approval",
+                        "refund_rejected_by_manager"
+                    ],
+                    "latency": 1.2162196999997832
+                }
+            ],
+            "latency": 1.2162196999997832,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "check_refund_amount",
+                "refund_requires_approval",
+                "check_human_approval",
+                "refund_rejected_by_manager"
+            ],
+            "conversation_id": 76,
+            "error": null
+        },
+        {
+            "id": 44,
+            "input": "I want to speak to a manager.",
+            "expected_intent": "HUMAN_ESCALATION",
+            "expected_tool": "create_ticket",
+            "expected_behavior": "create_high_priority_escalation_ticket",
+            "actual_intent": "HUMAN_ESCALATION",
+            "actual_tool": "create_ticket",
+            "actual_behavior": "human_escalation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00010.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I want to speak to a manager.",
+                    "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00010.",
+                    "nodes": [
+                        "understand_request",
+                        "escalation_flow"
+                    ],
+                    "latency": 1.6425894999993034
+                }
+            ],
+            "latency": 1.6425894999993034,
+            "nodes": [
+                "understand_request",
+                "escalation_flow"
+            ],
+            "conversation_id": 77,
+            "error": null
+        },
+        {
+            "id": 45,
+            "input": "Please escalate this to a human agent.",
+            "expected_intent": "HUMAN_ESCALATION",
+            "expected_tool": "create_ticket",
+            "expected_behavior": "create_high_priority_escalation_ticket",
+            "actual_intent": "HUMAN_ESCALATION",
+            "actual_tool": "create_ticket",
+            "actual_behavior": "human_escalation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00011.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Please escalate this to a human agent.",
+                    "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00011.",
+                    "nodes": [
+                        "understand_request",
+                        "escalation_flow"
+                    ],
+                    "latency": 1.1559613999561407
+                }
+            ],
+            "latency": 1.1559613999561407,
+            "nodes": [
+                "understand_request",
+                "escalation_flow"
+            ],
+            "conversation_id": 78,
+            "error": null
+        },
+        {
+            "id": 46,
+            "input": "I am not satisfied. I need a manager.",
+            "expected_intent": "HUMAN_ESCALATION",
+            "expected_tool": "create_ticket",
+            "expected_behavior": "create_high_priority_escalation_ticket",
+            "actual_intent": "HUMAN_ESCALATION",
+            "actual_tool": "create_ticket",
+            "actual_behavior": "human_escalation",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00012.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "I am not satisfied. I need a manager.",
+                    "response": "I've escalated your request to our support team. Your high-priority ticket is TKT-00012.",
+                    "nodes": [
+                        "understand_request",
+                        "escalation_flow"
+                    ],
+                    "latency": 1.2537269000313245
+                }
+            ],
+            "latency": 1.2537269000313245,
+            "nodes": [
+                "understand_request",
+                "escalation_flow"
+            ],
+            "conversation_id": 79,
+            "error": null
+        },
+        {
+            "id": 47,
+            "input": "Check order 12345.",
+            "expected_intent": "ORDER_STATUS",
+            "expected_tool": null,
+            "expected_behavior": "do_not_execute_invalid_order_identifier",
+            "actual_intent": "ORDER_STATUS",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Check order 12345.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "order_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.302473999967333
+                }
+            ],
+            "latency": 1.302473999967333,
+            "nodes": [
+                "understand_request",
+                "order_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 80,
+            "error": null
+        },
+        {
+            "id": 48,
+            "input": "Cancel order ABC-XYZ.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": null,
+            "expected_behavior": "do_not_execute_invalid_order_identifier",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel order ABC-XYZ.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.115587999986019
+                }
+            ],
+            "latency": 1.115587999986019,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 81,
+            "error": null
+        },
+        {
+            "id": 49,
+            "input": "Refund ₹5000 for order ABC-XYZ.",
+            "expected_intent": "ORDER_REFUND",
+            "expected_tool": null,
+            "expected_behavior": "do_not_execute_invalid_order_identifier",
+            "actual_intent": "ORDER_REFUND",
+            "actual_tool": "get_order",
+            "actual_behavior": "refund_rejected",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I couldn't find order ABC-XYZ. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Refund ₹5000 for order ABC-XYZ.",
+                    "response": "I couldn't find order ABC-XYZ. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "validate_refund_order",
+                        "refund_rejected"
+                    ],
+                    "latency": 1.5620621999842115
+                }
+            ],
+            "latency": 1.5620621999842115,
+            "nodes": [
+                "understand_request",
+                "validate_refund_order",
+                "refund_rejected"
+            ],
+            "conversation_id": 82,
+            "error": null
+        },
+        {
+            "id": 50,
+            "input": "Cancel my order immediately without checking whether it is eligible.",
+            "expected_intent": "ORDER_CANCELLATION",
+            "expected_tool": "get_order",
+            "expected_behavior": "validate_order_before_destructive_action",
+            "actual_intent": "ORDER_CANCELLATION",
+            "actual_tool": "get_order",
+            "actual_behavior": "order_not_found",
+            "intent_correct": true,
+            "tool_correct": true,
+            "behavior_correct": false,
+            "successful_run": true,
+            "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+            "responses": [
+                {
+                    "turn": 1,
+                    "input": "Cancel my order immediately without checking whether it is eligible.",
+                    "response": "I'm sorry, but I couldn't find that order. Please check the order ID and try again.",
+                    "nodes": [
+                        "understand_request",
+                        "cancellation_flow",
+                        "order_not_found"
+                    ],
+                    "latency": 1.4807720000389963
+                }
+            ],
+            "latency": 1.4807720000389963,
+            "nodes": [
+                "understand_request",
+                "cancellation_flow",
+                "order_not_found"
+            ],
+            "conversation_id": 83,
+            "error": null
+        }
+    ]
+}
