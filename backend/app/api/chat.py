@@ -162,7 +162,6 @@ def chat(request: ChatRequest):
 
         response_text = result["final_response"]
 
-
         # ====================================================
         # 6. SAVE UPDATED PENDING STATE
         # ====================================================
@@ -178,7 +177,6 @@ def chat(request: ChatRequest):
         conversation.updated_at = datetime.utcnow()
 
         db.commit()
-
 
         # ====================================================
         # 7. SAVE ASSISTANT RESPONSE

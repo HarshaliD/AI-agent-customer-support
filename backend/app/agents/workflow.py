@@ -8,7 +8,6 @@ from backend.app.tools.cancellation_tools import cancel_order
 from backend.app.tools.knowledge_tools import search_knowledge_base
 from backend.app.tools.refund_tools import request_refund
 from backend.app.tools.ticket_tools import create_ticket
-
 from backend.app.services.action_logger import execute_and_log_tool
 
 
@@ -26,111 +25,185 @@ def understand_request(state: SupportState):
     )
 
     response = structured_model.invoke(
-        f"""
-        You are the intent classifier for a customer support agent.
+       f"""
+            You are the intent classifier for a customer support agent.
 
-        Classify the customer's request into exactly ONE of these intents:
+            Classify the customer's request into exactly ONE of these intents.
 
-        ORDER_STATUS:
-        Questions about order status, tracking, delivery,
-        shipment location, or whether an order has arrived.
+            --------------------------------------------------------
+            INTENTS
+            --------------------------------------------------------
 
-        ORDER_CANCELLATION:
-        Requests to cancel an existing order.
+            ORDER_STATUS:
+            Questions about order status, tracking, delivery,
+            shipment location, or whether an order has arrived.
 
-        ORDER_REFUND:
-        Requests for a refund for an existing order.
+            ORDER_CANCELLATION:
+            Requests to cancel an existing order.
 
-        HUMAN_ESCALATION:
-        The customer explicitly wants to speak to a human,
-        manager, supervisor, support representative,
-        or asks for their issue to be escalated.
+            ORDER_REFUND:
+            Requests for a refund for an existing order.
 
-        GENERAL_QUERY:
-        General customer support questions that do not specifically
-        require order status, cancellation, refund, or escalation.
+            RETURN:
+            Questions about returning a product, return eligibility,
+            return window, return conditions, or the return process.
 
-        --------------------------------------------------------
-        ORDER ID
-        --------------------------------------------------------
+            PAYMENT:
+            Questions about payment methods, payment process,
+            or payment-related information.
 
-        Extract the order ID if the customer provides one.
+            ACCOUNT:
+            Questions about customer accounts, account settings,
+            login,
+            or account-related information.
 
-        If the current message does not contain an order ID,
-        use the conversation history to determine whether the
-        customer is referring to an existing order.
+            PRODUCT_INFORMATION:
+            Questions about products, product features,
+            specifications, availability, or other product information.
 
-        If no order ID can be determined, return an empty string.
+            COMPLAINT:
+            The customer is expressing dissatisfaction,
+            reporting a problem, or making a complaint.
 
-        --------------------------------------------------------
-        REFUND AMOUNT
-        --------------------------------------------------------
+            TECHNICAL_SUPPORT:
+            Questions about technical problems or issues
+            with the website, application, or service.
 
-        If this is a refund request, extract the requested refund amount.
+            HUMAN_ESCALATION:
+            The customer explicitly wants to speak to a human,
+            manager, supervisor, support representative,
+            or asks for their issue to be escalated.
 
-        If no refund amount is mentioned, return 0.
+            GENERAL_QUERY:
+            General customer support questions that do not specifically
+            fit any of the other defined intents.
 
-        --------------------------------------------------------
-        CANCELLATION CONFIRMATION
-        --------------------------------------------------------
+            --------------------------------------------------------
+            IMPORTANT CLASSIFICATION RULES
+            --------------------------------------------------------
 
-        There may be a pending action waiting for confirmation.
+            Choose the most specific intent that matches the customer's request.
 
-        Current pending action:
-        {state["pending_action"]}
+            If the customer explicitly asks to speak to a human,
+            manager, supervisor, or representative, classify it as
+            HUMAN_ESCALATION.
 
-        Current pending order:
-        {state["pending_order_id"]}
+            If the customer is primarily expressing dissatisfaction
+            or making a complaint without explicitly requesting a human,
+            classify it as COMPLAINT.
 
-        If pending_action is CANCEL_ORDER:
+            If the customer wants to cancel an existing order,
+            classify it as ORDER_CANCELLATION.
 
-        Confirmation examples:
-        - yes
-        - yes please
-        - confirm
-        - do it
-        - go ahead
-        - cancel it
+            If the customer wants money back for an existing order,
+            classify it as ORDER_REFUND.
 
-        These mean:
+            If the customer asks about returning a product or the return
+            process, classify it as RETURN.
 
-        user_confirmation = True
+            If the customer asks about payment methods or payment-related
+            information, classify it as PAYMENT.
 
-        Rejection examples:
-        - no
-        - no thanks
-        - don't do it
-        - nevermind
-        - leave it
+            If the customer asks about their account, login, or account
+            settings, classify it as ACCOUNT.
 
-        These mean:
+            If the customer asks about a product, its features,
+            specifications, or availability, classify it as
+            PRODUCT_INFORMATION.
 
-        user_confirmation = False
+            If the customer reports a technical problem with the website,
+            application, or service, classify it as TECHNICAL_SUPPORT.
 
-        If the response is unclear:
+            If the customer asks about the status, tracking, delivery,
+            or location of an existing order, classify it as ORDER_STATUS.
 
-        user_confirmation = None
+            Use GENERAL_QUERY only when the request does not clearly
+            belong to any of the other intents.
 
-        The confirmation is NOT a new business intent.
-        It is a response to the pending cancellation action.
+            --------------------------------------------------------
+            ORDER ID
+            --------------------------------------------------------
 
-        --------------------------------------------------------
-        CONVERSATION HISTORY
-        --------------------------------------------------------
+            Extract the order ID if the customer provides one.
 
-        {history_text}
+            If the current message does not contain an order ID,
+            use the conversation history to determine whether the
+            customer is referring to an existing order.
 
-        --------------------------------------------------------
-        CURRENT CUSTOMER MESSAGE
-        --------------------------------------------------------
+            If no order ID can be determined, return an empty string.
 
-        {state["user_message"]}
-        """
+            --------------------------------------------------------
+            REFUND AMOUNT
+            --------------------------------------------------------
+
+            If this is a refund request, extract the requested refund amount.
+
+            If no refund amount is mentioned, return 0.
+
+            --------------------------------------------------------
+            CANCELLATION CONFIRMATION
+            --------------------------------------------------------
+
+            There may be a pending action waiting for confirmation.
+
+            Current pending action:
+            {state["pending_action"]}
+
+            Current pending order:
+            {state["pending_order_id"]}
+
+            If pending_action is CANCEL_ORDER, determine whether the
+            current customer message confirms or declines the pending
+            cancellation.
+
+            Confirmation examples:
+            - yes
+            - yes please
+            - confirm
+            - do it
+            - go ahead
+            - cancel it
+
+            These mean:
+
+            user_confirmation = True
+
+            Rejection examples:
+            - no
+            - no thanks
+            - don't do it
+            - nevermind
+            - leave it
+
+            These mean:
+
+            user_confirmation = False
+
+            If the response is unclear:
+
+            user_confirmation = None
+
+            The confirmation is NOT a new business intent.
+            It is a response to the pending cancellation action.
+
+            --------------------------------------------------------
+            CONVERSATION HISTORY
+            --------------------------------------------------------
+
+            {history_text}
+
+            --------------------------------------------------------
+            CURRENT CUSTOMER MESSAGE
+            --------------------------------------------------------
+
+            {state["user_message"]}
+"""
     )
 
     # If the model did not extract an order ID from the
     # current message, preserve the pending order ID.
     order_id = response.order_id
+    print(f"\nPredicted Intent: {response.intent}")
 
     if not order_id and state["pending_order_id"]:
         order_id = state["pending_order_id"]
@@ -660,7 +733,61 @@ def escalation_flow(state: SupportState):
 
 
 # ============================================================
-# 8. GENERAL KNOWLEDGE FLOW
+# 8. COMPLAINT FLOW
+# ============================================================
+
+def complaint_flow(state: SupportState):
+
+    # Complaints are converted into support tickets so that
+    # a human support team can follow up.
+    #
+    # Current project limitation:
+    # SupportState does not yet contain customer_id, so we use
+    # the same demo customer used by the escalation flow.
+
+    customer_id = "CUS-001"
+
+    result = execute_and_log_tool(
+        create_ticket,
+        {
+            "customer_id": customer_id,
+            "category": "COMPLAINT",
+            "description": state["user_message"],
+            "priority": "high",
+        },
+        state["conversation_id"]
+    )
+
+    # Never claim that a ticket was created if the
+    # ticket tool failed.
+
+    if "error" in result:
+
+        return {
+            **state,
+            "final_response": (
+                "I couldn't create a support ticket right now. "
+                "Please try again."
+            ),
+        }
+
+    ticket_id = result.get(
+        "ticket_id",
+        "created"
+    )
+
+    return {
+        **state,
+        "final_response": (
+            "I've recorded your complaint and escalated it "
+            "to our support team. "
+            f"Your high-priority ticket is {ticket_id}."
+        ),
+    }
+
+
+# ============================================================
+# 9. GENERAL KNOWLEDGE FLOW
 # ============================================================
 
 def general_flow(state: SupportState):
@@ -729,6 +856,12 @@ def route_by_intent(state: SupportState):
     if state["intent"] == "HUMAN_ESCALATION":
         return "escalation_flow"
 
+    if state["intent"] == "COMPLAINT":
+        return "complaint_flow"
+
+    # RETURN, PAYMENT, ACCOUNT, PRODUCT_INFORMATION,
+    # TECHNICAL_SUPPORT and GENERAL_QUERY currently use
+    # the knowledge base flow.
     return "general_flow"
 
 
@@ -889,6 +1022,11 @@ graph.add_node(
 )
 
 graph.add_node(
+    "complaint_flow",
+    complaint_flow
+)
+
+graph.add_node(
     "general_flow",
     general_flow
 )
@@ -930,6 +1068,9 @@ graph.add_conditional_edges(
 
         "escalation_flow":
             "escalation_flow",
+
+        "complaint_flow":
+            "complaint_flow",
 
         "general_flow":
             "general_flow",
@@ -1031,6 +1172,16 @@ graph.add_edge(
 
 graph.add_edge(
     "cancellation_not_eligible",
+    END
+)
+
+
+# ============================================================
+# Complaint
+# ============================================================
+
+graph.add_edge(
+    "complaint_flow",
     END
 )
 
