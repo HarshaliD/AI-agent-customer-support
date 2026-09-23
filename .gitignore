@@ -8,3 +8,4 @@ __pycache__/
 *.sqlite3
 chroma_db/
 chroma_test_db/
+workflow_diagram_old.png
