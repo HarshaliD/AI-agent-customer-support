@@ -316,7 +316,7 @@ def check_cancellation_confirmation(state: SupportState):
                 "No problem. I won't cancel your order."
             ),
         }
-
+    #if reply is none or absurd
     return {
         **state,
         "final_response": (
