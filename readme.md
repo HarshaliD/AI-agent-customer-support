@@ -137,8 +137,11 @@ The project follows an 8-phase architectural progression, transitioning from a b
 ### 1. Request-Response & Database Architecture
 ![AI Agent Customer Support - System Architecture](./architecture_diagram.png)
 
-### 2. LangGraph Agent Workflow
+### 2. LangGraph High-Level Workflow
 ![AI Agent Customer Support - Workflow Diagram](./workflow_diagram.png)
+
+### 3. Detailed LangGraph Nodewise Execution Flow
+![LangGraph Nodewise Execution Flow](./langraph_nodes_diagram.png)
 
 ---
 
